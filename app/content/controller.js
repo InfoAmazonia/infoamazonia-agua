@@ -56,6 +56,12 @@ exports.ContentCtrl = [
 
 		});
 
+		if($stateParams.contentId) {
+			Content.resource.get({contentId: $stateParams.contentId}, function(content) {
+				$scope.content = content;
+			});
+		}
+
 		$scope.renderBlock = function(block) {
 			return SirTrevor.renderBlock(block);
 		}

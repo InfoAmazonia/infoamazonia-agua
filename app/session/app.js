@@ -1,10 +1,13 @@
 'use strict';
 
 angular
-	.module('mapasColetivos.session', [])
+	.module('mapasColetivos.session', [
+		'facebook'
+	])
 	.config([
 		'$stateProvider',
-		function($stateProvider) {
+		'FacebookProvider',
+		function($stateProvider, FacebookProvider) {
 
 			$stateProvider
 				.state('login', {
@@ -12,6 +15,8 @@ angular
 					controller: 'LoginCtrl',
 					templateUrl: '/views/login.html'
 				});
+
+			FacebookProvider.init(window.iaRiosConfig.oauth.facebook);
 		}
 	])
 	.factory('SessionService', require('./sessionService'))

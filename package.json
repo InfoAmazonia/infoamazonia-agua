@@ -57,6 +57,7 @@
 		"angular-ui-sortable": "angular-ui/ui-sortable",
 		"angular-ui-slider": "angular-ui/ui-slider",
 		"angular-modal": "miguelpeixe/angular-modal",
+		"angular-facebook": "Ciul/angular-facebook",
 		"ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
 		"eventable": "madebymany/eventable",
 		"sir-trevor": "madebymany/sir-trevor-js",

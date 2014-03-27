@@ -17,6 +17,7 @@ require('angular-resource/angular-resource');
 require('angular-sanitize/angular-sanitize');
 require('angular-fitvids/angular-fitvids');
 require('angular-ui-utils/modules/utils');
+require('angular-facebook/lib/angular-facebook');
 
 require('mapbox.js');
 require('leaflet-draw');

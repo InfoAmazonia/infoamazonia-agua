@@ -1,4 +1,23 @@
-<section id="maps">
+<section id="contents" class="loop-section">
+
+	<div class="section-title">
+		<div class="container">
+			<div class="twelve columns">
+				<h3>Últimos relatos</h3>
+			</div>
+		</div>
+	</div>
+	<div ng-controller="ContentCtrl" class="content row">
+		<div class="container">
+			<ul class="list-posts row">
+				<li class="four columns" ng-repeat="content in contents">
+					<div ng-include="templates.list" autoscroll="false"></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<section id="contents">
 	<div ng-controller="MapActionsCtrl" class="content row">
 		<div class="container">
 			<div class="three columns" ng-repeat="map in maps">

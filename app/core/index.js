@@ -6,10 +6,13 @@ angular.module('mapasColetivos.index', [])
 	'$scope',
 	'SessionService',
 	'$location',
+	'Content',
 	'Map',
-	function($scope, Session, $location, Map) {
+	function($scope, Session, $location, Content, Map) {
 
 		$scope.$session = Session;
+
+		$scope.baseUrl = '';
 
 		$scope.$on('$stateChangeSuccess', function() {
 
@@ -23,9 +26,19 @@ angular.module('mapasColetivos.index', [])
 			angular.element('html').removeClass('landing');
 		});
 
+		// Contents
+
+		Content.resource.query({
+			perPage: 4
+		}, function(res) {
+
+			$scope.contents = res.contents;
+
+		});
+
 		// Maps
 
-		Map.resource.get({
+		Map.resource.query({
 			perPage: 4
 		}, function(res) {
 

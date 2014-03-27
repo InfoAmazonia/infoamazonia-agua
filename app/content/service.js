@@ -16,6 +16,7 @@ exports.Content = [
 			resource: $resource(apiPrefix + '/contents/:contentId', {}, {
 				'query': {
 					method: 'GET',
+					url: apiPrefix + '/contents',
 					isArray: false,
 					loadingMessage: 'Carregando conteúdos'
 				},
@@ -63,7 +64,7 @@ exports.Content = [
 			// Get content features method
 			getFeatures: function(content, features) {
 
-				if(content.features.length) {
+				if(content.features && content.features.length) {
 
 					if(features && features.length) {
 

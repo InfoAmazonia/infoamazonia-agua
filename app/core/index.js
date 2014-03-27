@@ -6,14 +6,10 @@ angular.module('mapasColetivos.index', [])
 	'$scope',
 	'SessionService',
 	'$location',
-	function($scope, Session, $location) {
+	'Map',
+	function($scope, Session, $location, Map) {
 
 		$scope.$session = Session;
-
-		$scope.$watch('$session.authenticated()', function(auth) {
-			if(auth)
-				$location.path('/dashboard/');
-		});
 
 		$scope.$on('$stateChangeSuccess', function() {
 
@@ -25,7 +21,17 @@ angular.module('mapasColetivos.index', [])
 
 		$scope.$on('$stateChangeStart', function() {
 			angular.element('html').removeClass('landing');
-		})
+		});
+
+		// Maps
+
+		Map.resource.get({
+			perPage: 4
+		}, function(res) {
+
+			$scope.maps = res.maps;
+
+		});
 
 	}
 ]);

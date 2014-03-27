@@ -65,7 +65,7 @@
 /* #Big screens
 ===================================================*/
 
-    /* Note: Design for a width of 1680px */
+    /* Note: Design for a width of 1680px
 
     @media only screen and (min-width: 1680px) {
         .container                                  { width: 1680px; }
@@ -92,7 +92,7 @@
         .container .one-third.column                { width: 520px; }
         .container .two-thirds.column               { width: 1080px; }
 
-        /* Offsets */
+        /* Offsets
         .container .offset-by-one                   { margin-left: 140px;  }
         .container .offset-by-two                   { margin-left: 280px; }
         .container .offset-by-three                 { margin-left: 420px; }
@@ -105,6 +105,7 @@
         .container .offset-by-ten                   { margin-left: 1400px; }
         .container .offset-by-eleven                { margin-left: 1540px; }
     }
+    */
 
     /* Note: Design for a width of 1200px */
 

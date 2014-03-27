@@ -1,0 +1,35 @@
+<section id="login">
+	<div class="login-content">
+		<h1>Entrar</h1>
+		<div class="login-form">
+			<form class="form-horizontal" role="form" ng-submit="login()">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input id="email" type="email" ng-model="credentials.email" placeholder="Email" />
+				</div>
+				<div class="form-group">
+					<label for="password">Senha</label>
+					<input id="password" type="password" placeholder="Senha" ng-model="credentials.password" />
+				</div>
+				<input type="submit" value="Entrar" />
+				<div class="form-group action-group">
+					<a class="signup" href="/signup">Cadastre-se</a>
+					<a href="/forgot_password">Recuperar senha</a>
+				</div>
+			</form>
+		</div>
+		<div class="social-login">
+			<h2>Conecte-se via</h2>
+			<div class="social-networks">
+				<form action="{{authFacebook}}" method="GET">
+					<input type="hidden" name="callback_url" value="{{local}}" /> 
+					<input type="submit" class="lsf facebook" title="Facebook" value="&#xE047;" />
+				</form>
+				<form action="{{authGoogle}}" method="POST">
+					<input type="hidden" name="callback_url" value="{{local}}" /> 
+					<input type="submit" class="lsf google" title="Google" value="&#xE05a;" />
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

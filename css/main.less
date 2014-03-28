@@ -160,7 +160,6 @@ a.button:visited {
 	margin: 5px 0;
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
 	.transition(all 100ms ease);
-	//.border-radius(4px);
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: 600;
@@ -199,7 +198,6 @@ a.load.loading {
 a,a:visited {
 	text-decoration: none;
 	color: #2C8FC6;
-	.transition(all .25s ease);
 }
 
 p {
@@ -244,6 +242,7 @@ header#masthead {
 	background: #f9f9f9;
 	.box-shadow(0 2px 5px rgba(0,0,0,0.05));
 	position: relative;
+	border-bottom: 1px solid #e0e0e0;
 	a {	
 		color: #404040;
 		font-size: 11px;
@@ -267,7 +266,7 @@ header#masthead {
 			text-transform: uppercase;
 			display: block;
 			line-height: 28px;
-			font-size: 28px;
+			font-size: 20px;
 			color: #333;
 			img {
 				display: inline-block;
@@ -345,24 +344,28 @@ header#masthead {
 	width: 100%;
 	display: block;
 	background: #f0f0f0;
-	border-bottom: 1px solid #e0e0e0;
 	nav {
 		margin: 0;
 		padding: 0;
-		float: left;
 		ul {
 			margin: 0;
 			padding: 0;
 			list-style: none;
-			float: left;
+			display: table;
+			width: 100%;
+			border-bottom: 1px solid #e0e0e0;
+			border-left: 1px solid #e0e0e0;
 			li {
-				float: left;
+				display: table-cell;
 				margin: 0;
+				text-align: center;
 				a {
 					display: block;
 					text-transform: uppercase;
-					padding: 10px 20px;
+					padding: 15px 20px;
 					color: #444;
+					border-right: 1px solid #e0e0e0;
+					line-height: 100%;
 					&:hover {
 						background: rgba(255,255,255,0.4);
 					}
@@ -375,6 +378,11 @@ header#masthead {
 						background-image:      -o-linear-gradient(top, #8ec63d, #77a832);
 						background-image:         linear-gradient(to bottom, #8ec63d, #77a832);
 						color: #fff;
+					}
+					.lsf {
+						font-size: 150%;
+						line-height: 50%;
+						margin-right: 20px;
 					}
 				}
 				&.current_page_item {
@@ -972,25 +980,6 @@ section.loop-section {
 	}
 }
 
-body {
-	.wp-paginate {
-		float: right;
-		margin: 0 0 30px;
-		.current {
-			background: #8ec63d;
-			border: 1px solid #77a832;
-			padding: 7px 12px;
-			//.border-radius(3px);
-		}
-		a {
-			background: #f0f0f0;
-			border-color: #ccc;
-			padding: 7px 12px;
-			//.border-radius(3px);
-		}
-	}
-}
-
 .list-posts {
 	padding-top: 30px;
 	.transition(all 25s ease);
@@ -998,7 +987,6 @@ body {
 		height: 470px;
 		overflow: hidden;
 		article {
-			cursor: pointer;
 			border-bottom: 1px solid #f0f0f0;
 			margin: 0;
 			overflow: hidden;
@@ -1705,8 +1693,9 @@ footer#colophon {
 	top: 0;
 }
 
-@header-top: 112px;
+@header-top: 73px;
 
+#messages,
 .map-view,
 #login,
 .map-editor-container {

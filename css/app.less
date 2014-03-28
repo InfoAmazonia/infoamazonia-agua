@@ -262,56 +262,29 @@ input.no-canvas {
 /*
  * Header
  */
-#mast-header {
-	background: #fff;
-	padding: 10px 0;
-	height: 32px;
-	border-bottom: 1px solid #eee;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 99999;
+.landing #masthead {
+	background: @light-blue;
+	border-color: @blue;
 	h1 {
-		text-indent: -9999px;
-		line-height: 0;
-		margin: 0;
-		padding: 0;
-		img {
-			display: block;
+		a {
+			color: rgba(255,255,255,0.8);
+			.rios {
+				margin: 20px 0 20px 10px;
+				font-size: 72px;
+				line-height: 72px;
+				display: inline-block;
+				color: #fff;
+			}
 		}
 	}
-	h2 {
-		float: right;
-		text-transform: uppercase;
-		font-size: 18px;
-		color: @light-blue;
-	}
-	#mast-nav {
-		float: right;
-		margin: 0;
-		li {
-			float: left;
-			margin: 0 0 0 1px;
-			padding: 0;
-			a {
-				color: @dark-blue;
-				text-decoration: none;
-				font-size: 12px;
-				line-height: 32px;
-				padding: 10px 0 10px 30px;
-				text-transform: uppercase;
-				font-weight: 600;
-				&:hover {
-					color: #333;
-				}
-				.lsf {
-					display: inline-block;
-					font-size: 18px;
-					margin-right: 10px;
-					font-weight: 200;
-					opacity: .5;
-				}
+	nav ul {
+		border-color: @dark-blue;
+		li a {
+			border-color: @dark-blue;
+			background: @blue;
+			color: #fff;
+			&:hover {
+				background: @dark-blue;
 			}
 		}
 	}
@@ -608,23 +581,28 @@ input.no-canvas {
 			.social-networks {
 				display: table;
 				width: 100%;
-				.lsf {
-					font-size: 100px;
-					line-height: 100px;
+				a {
+					color: #fff;
+					padding: 10px 0;
+					.lsf {
+						font-size: 20px;
+						margin-right: 10px;
+						display: inline-block;
+					}
 					text-decoration: none;
 					display: table-cell;
 					text-align: center;
 					&.google {
-						color: #dd4b39;
+						background: #dd4b39;
 					}
 					&.twitter {
-						color: #55acee;
+						background: #55acee;
 					}
 					&.facebook {
-						color: #3B5998;
+						background: #3B5998;
 					}
 					&:hover {
-						color: #111;
+						background: #111;
 					}
 				}
 			}

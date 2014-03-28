@@ -24,7 +24,7 @@
 <body>
 	<header id="masthead">
 		<div class="container">
-			<div class="twelve columns">
+			<div class="seven columns">
 				<h1>
 					<a href="/" title="InfoAmazonia">
 						InfoAmazonia
@@ -32,68 +32,29 @@
 						<span class="rios">Rios</span>
 					</a>
 				</h1>
-				<p class="slogan">Maps and data</p>
+			</div>
+			<div class="five columns">
+				<section id="mastnav" class="clearfix">
+					<nav ng-controller="LoginCtrl">
+						<ul class="menu">
+							<li><a href="/about" title="Sobre o projeto">Sobre o projeto</a></li>
+							<li ng-show="isAuthenticated"><a href="/dashboard" title="Painel de Controle">
+								<span class="lsf">&#xe055;</span>
+								Painel de Controle
+							</a></li>
+							<li ng-show="isAuthenticated"><a title="Sair" href="javascript:void(0);" ng-click="logout()">
+								<span class="lsf">&#xE088;</span>
+								Sair
+							</a></li>
+							<li ng-hide="isAuthenticated"><a href="/login" title="Entrar">
+								<span class="lsf">&#xE087;</span>
+								Entrar
+							</a></li>
+						</ul>
+					</nav>
+				</section>
 			</div>
 		</div>
-		<section id="mastnav" class="clearfix">
-			<div class="container">
-				<div class="eight columns">
-					<nav ng-controller="LoginCtrl">
-						<ul>
-							<div class="menu-topo-container">
-								<ul id="menu-topo" class="menu">
-									<li><a href="/about" title="Sobre o projeto">Sobre o projeto</a></li>
-									<li ng-show="isAuthenticated"><a href="/dashboard" title="Painel de Controle">
-										<span class="lsf">&#xe055;</span>
-										Painel de Controle
-									</a></li>
-									<li ng-show="isAuthenticated"><a title="Sair" ng-click="logout()">
-										<span class="lsf">&#xE088;</span>
-										Sair
-									</a></li>
-									<li ng-hide="isAuthenticated"><a href="/login" title="Entrar">
-										<span class="lsf">&#xE087;</span>
-										Entrar
-									</a></li>
-								</ul>
-							</div>
-						</ul>
-					</nav>
-				</div>
-				<div class="four columns">
-					<!--
-					<nav id="langnav">
-						<ul>
-							<li><a href="http://infoamazonia.org/pt/">pt</a></li>
-							<li><a href="http://infoamazonia.org/es/">es</a></li>
-							<li><a href="http://infoamazonia.org/" class="active">en</a></li>
-						</ul>
-					</nav>
-					-->
-					<!--
-					<nav id="social">
-						<ul>
-							<li class="twitter">
-								<a href="https://twitter.com/infoamazonia" rel="external" target="_blank" title="Twitter"></a>
-							</li>
-							<li class="fb">
-								<a href="https://www.facebook.com/oecodata" rel="external" target="_blank" title="Facebook"></a>
-							</li>
-						</ul>
-					</nav>
-					-->
-					<!--
-					<nav id="feedback">
-						<ul>
-							<li>
-								<a href="/about" title="About">About</a>
-							</li>
-						</ul>
-					</nav>
-					-->
-				</div>
-			</div>
-		</section>
 	</header>
 	<div id="messages" ng-controller="MessageCtrl">
 		<div class="message-content animte-show" ng-repeat="message in messages" ng-show="message.text">

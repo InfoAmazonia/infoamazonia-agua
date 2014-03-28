@@ -1,8 +1,9 @@
 'use strict';
 
-var config = {
+module.exports = {
 	server: 'local',
-	apiPrefix: '/api/v1'
+	apiPrefix: '/api/v1',
+	oauth: {
+		facebook: '' // Facebook Client ID
+	}
 };
-
-module.exports = config;

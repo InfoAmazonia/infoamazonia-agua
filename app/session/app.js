@@ -16,7 +16,7 @@ angular
 					templateUrl: '/views/login.html'
 				});
 
-			FacebookProvider.init(window.iaRiosConfig.oauth.facebook);
+			FacebookProvider.init(require('../config').oauth.facebook);
 		}
 	])
 	.factory('SessionService', require('./sessionService'))
@@ -28,9 +28,9 @@ angular
 		function($rootScope, $q, $window) {
 			return {
 				request: function(config) {
-					config.params = config.params || {};
+					config.headers = config.headers || {};
 					if ($window.sessionStorage.accessToken) {
-						config.params.access_token = $window.sessionStorage.accessToken;
+						config.headers.Authorization = 'Bearer ' + $window.sessionStorage.accessToken;
 					}
 					return config;
 				},

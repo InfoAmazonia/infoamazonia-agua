@@ -20,8 +20,8 @@
 	"scripts": {
 		"build": "npm run bundle && mkdir -p dist && ./node_modules/.bin/browserify -t brfs -r topojson app/app.js | ./node_modules/.bin/uglifyjs -mt > dist/app.js",
 		"bundle": "mkdir -p lib && ./node_modules/.bin/browserify app/vendor.js | ./node_modules/.bin/uglifyjs -mt > lib/vendor.js",
-		"install": "cp ./node_modules/maki/www/images/maki-sprite.png ./img/maki-sprite.png && ./node_modules/.bin/napa && npm run build",
-		"watch": "./node_modules/.bin/watchify -t brfs -r topojson app/app.js -o dist/app.js"
+		"install": "cp -n ./app/config.example.js ./app/config.js && cp ./node_modules/maki/www/images/maki-sprite.png ./img/maki-sprite.png && ./node_modules/.bin/napa && npm run build",
+		"watch": "./node_modules/.bin/watchify -t brfs -r topojson app/app.js -o dist/app.js | ./node_modules/.bin/watch-less -d css -e .css"
 
 	},
 	"dependencies": {
@@ -39,10 +39,13 @@
 		"jquery-ui-browserify": "latest",
 		"markdown": "latest",
 		"grvtr": "latest",
-		"napa": "latest",
 		"browserify": "latest",
 		"uglify-js": "latest",
-		"watchify": "0.6.2"
+		"napa": "latest"
+	},
+	"devDependencies": {
+		"watchify": "0.6.2",
+		"watch-less": "latest"
 	},
 	"napa": {
 		"angular": "angular/bower-angular",
@@ -58,6 +61,7 @@
 		"angular-ui-slider": "angular-ui/ui-slider",
 		"angular-modal": "miguelpeixe/angular-modal",
 		"angular-facebook": "Ciul/angular-facebook",
+		"angular-gplus": "sirkitree/angular-directive.g-signin",
 		"ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
 		"eventable": "madebymany/eventable",
 		"sir-trevor": "madebymany/sir-trevor-js",

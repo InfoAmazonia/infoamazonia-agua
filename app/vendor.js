@@ -18,6 +18,7 @@ require('angular-sanitize/angular-sanitize');
 require('angular-fitvids/angular-fitvids');
 require('angular-ui-utils/modules/utils');
 require('angular-facebook/lib/angular-facebook');
+require('angular-gplus/google-plus-signin');
 
 require('mapbox.js');
 require('leaflet-draw');

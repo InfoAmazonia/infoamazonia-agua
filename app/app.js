@@ -94,7 +94,47 @@ angular.module('mapasColetivos', [
 			.state('home', {
 				url: '/',
 				controller: 'IndexCtrl',
-				templateUrl: '/views/landing.html'
+				templateUrl: '/views/landing.html',
+				resolve: {
+					'MapData': [
+						'$q',
+						'Map',
+						function($q, Map) {
+
+							var deferred = $q.defer();
+
+							Map.resource.query({
+								perPage: 4
+							}, function(res) {
+
+								deferred.resolve(res.maps);
+
+							});
+
+							return deferred.promise;
+
+						}
+					],
+					'ContentData': [
+						'$q',
+						'Content',
+						function($q, Content) {
+
+							var deferred = $q.defer();
+
+							Content.resource.query({
+								perPage: 4
+							}, function(res) {
+
+								deferred.resolve(res.contents);
+
+							});
+
+							return deferred.promise;
+
+						}
+					]
+				}
 			});
 
 		$locationProvider.html5Mode(true);

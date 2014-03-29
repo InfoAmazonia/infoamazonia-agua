@@ -6,9 +6,9 @@ angular.module('mapasColetivos.index', [])
 	'$scope',
 	'SessionService',
 	'$location',
-	'Content',
-	'Map',
-	function($scope, Session, $location, Content, Map) {
+	'MapData',
+	'ContentData',
+	function($scope, Session, $location, MapData, ContentData) {
 
 		$scope.$session = Session;
 
@@ -27,24 +27,18 @@ angular.module('mapasColetivos.index', [])
 		});
 
 		// Contents
-
-		Content.resource.query({
-			perPage: 4
-		}, function(res) {
-
-			$scope.contents = res.contents;
-
-		});
+		$scope.contents = ContentData;
 
 		// Maps
 
-		Map.resource.query({
-			perPage: 4
-		}, function(res) {
+		$scope.maps = MapData;
 
-			$scope.maps = res.maps;
+		$scope.mapOptions = {
+			'scrollWheelZoom': false,
+			'markerCluster': true
+		};
 
-		});
+		$scope.mapId = $scope.maps[0]._id;
 
 	}
 ]);

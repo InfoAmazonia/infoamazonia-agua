@@ -1,5 +1,13 @@
-<section id="contents" class="loop-section">
+<section id="stage-map" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
 
+	<div ng-controller="FeatureCtrl">
+		<div class="map-container">
+			<div id="map"></div>
+		</div>
+	</div>
+
+</section>
+<section id="contents" class="loop-section">
 	<div class="section-title">
 		<div class="container">
 			<div class="twelve columns">

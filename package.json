@@ -28,6 +28,7 @@
 		"less": "latest",
 		"leaflet": "latest",
 		"leaflet-draw": "latest",
+		"leaflet.markercluster": "latest",
 		"mapbox.js": "latest",
 		"maki": "latest",
 		"brfs": "0.0.8",
@@ -39,7 +40,7 @@
 		"jquery-ui-browserify": "latest",
 		"markdown": "latest",
 		"grvtr": "latest",
-		"browserify": "latest",
+		"browserify": "3.33.1",
 		"uglify-js": "latest",
 		"napa": "latest"
 	},

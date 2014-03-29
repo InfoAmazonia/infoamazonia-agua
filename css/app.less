@@ -290,6 +290,19 @@ input.no-canvas {
 	}
 }
 
+#stage-map {
+	width: 100%;
+	height: 600px;
+	position: relative;
+	#map {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+}
+
 /*
  * FOOTER
  */
@@ -571,6 +584,7 @@ input.no-canvas {
 			width: 100%;
 			padding: 10px;
 			box-sizing: border-box;
+			-moz-box-sizing: border-box;
 			background: #fff;
 		}
 		.login-form {
@@ -579,9 +593,11 @@ input.no-canvas {
 		.social-login {
 			text-align: justify;
 			.social-networks {
-				display: table;
 				width: 100%;
-				a {
+				> * {
+					iframe {
+						width: 100% !important;
+					}
 					color: #fff;
 					padding: 10px 0;
 					.lsf {
@@ -590,7 +606,9 @@ input.no-canvas {
 						display: inline-block;
 					}
 					text-decoration: none;
-					display: table-cell;
+					display: block;
+					margin-bottom: 10px;
+					width: 100% !important;
 					text-align: center;
 					&.google {
 						background: #dd4b39;

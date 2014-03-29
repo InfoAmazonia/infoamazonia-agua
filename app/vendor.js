@@ -22,6 +22,7 @@ require('angular-gplus/google-plus-signin');
 
 require('mapbox.js');
 require('leaflet-draw');
+require('leaflet.markercluster');
 
 require('jquery-ui-browserify');
 require('ngInfiniteScroll/ng-infinite-scroll');

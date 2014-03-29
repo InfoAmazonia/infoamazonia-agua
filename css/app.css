@@ -280,6 +280,18 @@ input.no-canvas {
 .landing #masthead nav ul li a:hover {
   background: #2f7ac0;
 }
+#stage-map {
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+#stage-map #map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 /*
  * FOOTER
  */
@@ -582,6 +594,7 @@ input.no-canvas {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
   background: #fff;
 }
 #login .login-content .login-form {
@@ -591,31 +604,35 @@ input.no-canvas {
   text-align: justify;
 }
 #login .login-content .social-login .social-networks {
-  display: table;
   width: 100%;
 }
-#login .login-content .social-login .social-networks a {
+#login .login-content .social-login .social-networks > * {
   color: #fff;
   padding: 10px 0;
   text-decoration: none;
-  display: table-cell;
+  display: block;
+  margin-bottom: 10px;
+  width: 100% !important;
   text-align: center;
 }
-#login .login-content .social-login .social-networks a .lsf {
+#login .login-content .social-login .social-networks > * iframe {
+  width: 100% !important;
+}
+#login .login-content .social-login .social-networks > * .lsf {
   font-size: 20px;
   margin-right: 10px;
   display: inline-block;
 }
-#login .login-content .social-login .social-networks a.google {
+#login .login-content .social-login .social-networks > *.google {
   background: #dd4b39;
 }
-#login .login-content .social-login .social-networks a.twitter {
+#login .login-content .social-login .social-networks > *.twitter {
   background: #55acee;
 }
-#login .login-content .social-login .social-networks a.facebook {
+#login .login-content .social-login .social-networks > *.facebook {
   background: #3B5998;
 }
-#login .login-content .social-login .social-networks a:hover {
+#login .login-content .social-login .social-networks > *:hover {
   background: #111;
 }
 #login .login-content input[type=submit] {

@@ -2,7 +2,8 @@
 
 angular
 	.module('mapasColetivos.session', [
-		'facebook'
+		'facebook',
+		'directive.g+signin'
 	])
 	.config([
 		'$stateProvider',
@@ -16,7 +17,15 @@ angular
 					templateUrl: '/views/login.html'
 				});
 
+			$stateProvider
+				.state('signup', {
+					url: '/signup/',
+					controller: 'LoginCtrl',
+					templateUrl: '/views/signup.html'
+				});
+
 			FacebookProvider.init(require('../config').oauth.facebook);
+
 		}
 	])
 	.factory('SessionService', require('./sessionService'))
@@ -30,15 +39,10 @@ angular
 				request: function(config) {
 					config.headers = config.headers || {};
 					if ($window.sessionStorage.accessToken) {
+						//config.withCredentials = true;
 						config.headers.Authorization = 'Bearer ' + $window.sessionStorage.accessToken;
 					}
-					return config;
-				},
-				responseError: function(rejection) {
-					if (rejection.status === 401) {
-						// handle the case where the user is not authenticated
-					}
-					return $q.reject(rejection);
+					return config || $q.when(config);
 				}
 			};
 		}

@@ -72,9 +72,6 @@ angular.module('mapasColetivos.messageStatus', [])
 	function($q, $rootScope, $timeout, Message) {
 
 		return {
-			request: function(config) {
-				return config || $q.when(config);
-			},
 			response: function(response) {
 				if(response.data && response.data.messages) {
 					angular.forEach(response.data.messages, function(message) {

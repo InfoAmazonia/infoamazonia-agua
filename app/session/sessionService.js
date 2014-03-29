@@ -24,16 +24,29 @@ module.exports = [
 		return {
 			authenticate: function(credentials, callback) {
 				$http
-					.post(apiPrefix + '/users/session', credentials)
+					.post(apiPrefix + '/access_token/local', credentials)
 					.success(function(data, status, headers, config) {
 						login(data, callback);
 					});
 			},
 			tokenAuth: function(token, provider, callback) {
+				$http({
+					url: apiPrefix + '/access_token/' + provider,
+					method: 'POST',
+					headers: {
+						'Authorization': 'Bearer ' + token,
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					}
+				}).success(function(data, status, headers, config) {
+					login(data, callback);
+				});
+			},
+			register: function(user) {
 				$http
-					.post(apiPrefix + '/access_token/' + provider, {'access_token': token})
+					.post(apiPrefix + '/users', user)
 					.success(function(data, status, headers, config) {
-						login(data, callback);
+						console.log(data);
 					});
 			},
 			logout: function() {

@@ -30,21 +30,12 @@ exports.MapCtrl = [
 
 		$scope.$map = Map;
 
-		// New map
-		if($location.path() == '/maps/new/') {
+		$scope.initMap = function(mapId, options) {
 
-			var draft = new Map.resource({
-				title: 'Untitled',
-				center: [0,0],
-				zoom: 2
-			});
-			draft.$save(function(draft) {
-				$location.path('/maps/' + draft._id + '/edit/').replace();
-			}, function(err) {
-				// TODO error handling
-			});
+			options = options || {};
 
-		} else if($stateParams.mapId) {
+			if(!mapId)
+				return false;
 
 			var origMap;
 
@@ -70,7 +61,7 @@ exports.MapCtrl = [
 				return $location.path().indexOf('edit') !== -1;
 			}
 
-			Map.resource.get({mapId: $stateParams.mapId}, function(map) {
+			Map.resource.get({mapId: mapId}, function(map) {
 
 				MapView.sidebar(true);
 
@@ -82,10 +73,10 @@ exports.MapCtrl = [
 
 				$scope.baseUrl = '/maps/' + map._id;
 
-				var mapOptions = {
+				var mapOptions = _.extend({
 					center: $scope.map.center ? $scope.map.center : [0,0],
 					zoom: $scope.map.zoom ? $scope.map.zoom : 2
-				};
+				}, options);
 
 				if(!$scope.isEditing()) {
 					mapOptions = _.extend(mapOptions, {
@@ -226,17 +217,7 @@ exports.MapCtrl = [
 
 							marker.on('click', function() {
 
-								if(!$scope.isEditing()) {
-
-									$state.go('singleMap.feature', {
-										featureId: marker.mcFeature._id
-									});
-
-								} else {
-
-									// Do something?
-
-								}
+								$rootScope.$broadcast('map.feature.click', marker);
 
 							});
 
@@ -436,6 +417,55 @@ exports.MapCtrl = [
 
 			});
 
+		}
+
+		$scope.$on('map.page.next', function(event, res) {
+			if(res.maps.length) {
+				angular.forEach(res.maps, function(map) {
+					$scope.maps.push(map);
+				});
+				$scope.maps = $scope.maps; // trigger digest
+			}
+		});
+
+		// New map
+		if($location.path() == '/maps/new/') {
+
+			var draft = new Map.resource({
+				title: 'Untitled',
+				center: [0,0],
+				zoom: 2
+			});
+			draft.$save(function(draft) {
+				$location.path('/maps/' + draft._id + '/edit/').replace();
+			}, function(err) {
+				// TODO error handling
+			});
+
+		/*
+		 * SINGLE MAP PAGE
+		 */
+
+		} else if($stateParams.mapId) {
+
+			$scope.initMap($stateParams.mapId);
+
+			$scope.$on('map.feature.click', function(event, marker) {
+
+				if(!$scope.isEditing()) {
+
+					$state.go('singleMap.feature', {
+						featureId: marker.mcFeature._id
+					});
+
+				} else {
+
+					// Do something?
+
+				}
+
+			})
+
 		} else {
 
 			Page.setTitle('Mapas');
@@ -468,15 +498,6 @@ exports.MapCtrl = [
 			});
 
 		}
-
-		$scope.$on('map.page.next', function(event, res) {
-			if(res.maps.length) {
-				angular.forEach(res.maps, function(map) {
-					$scope.maps.push(map);
-				});
-				$scope.maps = $scope.maps; // trigger digest
-			}
-		});
 
 	}
 ];

@@ -9,11 +9,6 @@ module.exports = [
 	'Facebook',
 	function($scope, Session, $location, config, $sce, Facebook) {
 
-		// $scope.authFacebook = $sce.trustAsResourceUrl(config.server + '/auth/facebook');
-		// $scope.authGoogle = $sce.trustAsResourceUrl(config.server + '/auth/google');
-
-		// $scope.local = window.location.href;
-
 		$scope.$session = Session;
 
 		$scope.$watch('$session.authenticated()', function(auth) {
@@ -26,16 +21,19 @@ module.exports = [
 			$scope.facebookReady = ready;
 		});
 
-		var login = function(response) {
+		var auth = function(provider, token) {
 
-			if(response.status == 'connected') {
+			Session.tokenAuth(token, provider, function(data) {
+				$location.path('/dashboard');
+			});
 
-				Session.tokenAuth(response.authResponse.accessToken, 'facebook', function(data) {
-					$location.path('/dashboard');
-				});
-
-			}
 		}
+
+		$scope.googleClientID = config.oauth.google;
+
+		$scope.$on('event:google-plus-signin-success', function(event, response) {
+			auth('google', response.access_token);
+		});
 
 		$scope.login = function(provider) {
 
@@ -45,23 +43,23 @@ module.exports = [
 
 					if(response.status == 'connected') {
 
-						login(response);
+						auth('facebook', response.authResponse.accessToken);
 
 					} else {
 
 						Facebook.login(function(response) {
 
-							login(response);
+							if(response.status == 'connected') {
+
+								auth('facebook', response.authResponse.accessToken);
+
+							}
 
 						}, {scope: 'email'});
 
 					}
 
 				});
-
-			} else if(provider == 'google') {
-
-
 
 			} else {
 
@@ -72,6 +70,12 @@ module.exports = [
 			}
 
 		};
+
+		$scope.register = function() {
+
+			Session.register($scope.user);
+
+		}
 
 		$scope.logout = Session.logout;
 

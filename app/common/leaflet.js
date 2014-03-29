@@ -21,8 +21,11 @@ angular.module('mapasColetivos.leaflet', [])
 
 		return {
 			init: function(id, config) {
+				this.config = config;
 				this.destroy();
-				//config = _.extend({ infoControl: tr, attributionControl: true }, config);
+				if(config.markerCluster) {
+					featureLayer = new L.MarkerClusterGroup();
+				}
 				map = L.mapbox.map(id, null, config);
 				map.whenReady(function() {
 					map.addLayer(baseLayer);
@@ -99,6 +102,9 @@ angular.module('mapasColetivos.leaflet', [])
 					var self = this;
 					var features = [];
 					var featureLayer = L.featureGroup();
+					if(this.config.markerCluster) {
+						featureLayer = new L.MarkerClusterGroup();
+					}
 					featureLayer.mcLayer = layer;
 					groups.push(featureLayer);
 					angular.forEach(layer.features, function(f) {

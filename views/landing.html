@@ -1,9 +1,18 @@
 <section id="stage-map" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
 
-	<nav id="maps-nav">
-		<ul>
-			<li ng-repeat="map in maps">
-				<a href="javascript:void(0);" ng-click="mapId = map._id; initMap(mapId, mapOptions);">{{map.title}}</a>
+	<nav id="stage-filters">
+		<ul class="container">
+			<li class="four columns">
+				<div class="search">
+				</div>
+			</li>
+			<li class="four columns">
+				<div class="layers">
+				</div>
+			</li>
+			<li class="four columns">
+				<div class="categories">
+				</div>
 			</li>
 		</ul>
 	</nav>

@@ -287,15 +287,20 @@ input.no-canvas {
 }
 #stage-map #map {
   position: absolute;
-  top: 0;
+  top: 100px;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
 }
-#stage-map #maps-nav {
+#stage-map #stage-filters {
   position: absolute;
   z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: #2f7ac0;
 }
 #stage-map #reports-count {
   font-size: 100px;

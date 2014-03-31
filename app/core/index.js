@@ -8,7 +8,8 @@ angular.module('mapasColetivos.index', [])
 	'$location',
 	'MapData',
 	'ContentData',
-	function($scope, Session, $location, MapData, ContentData) {
+	'Content',
+	function($scope, Session, $location, MapData, ContentData, Content) {
 
 		$scope.$session = Session;
 
@@ -27,7 +28,7 @@ angular.module('mapasColetivos.index', [])
 		});
 
 		// Contents
-		$scope.contents = ContentData;
+		$scope.latestReports = ContentData;
 
 		// Maps
 

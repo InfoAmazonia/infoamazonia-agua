@@ -5,6 +5,8 @@ window.grvtr = require('grvtr');
 window.markdown = require("markdown").markdown;
 
 require('angular/angular');
+require('angular-cookies/angular-cookies');
+require('angular-translate/angular-translate');
 require('angular-route/angular-route');
 require('angular-elastic/elastic');
 require('angular-ui-router/release/angular-ui-router');

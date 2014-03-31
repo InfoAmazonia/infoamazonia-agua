@@ -1,5 +1,18 @@
 <section id="stage-map" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
 
+	<nav id="maps-nav">
+		<ul>
+			<li ng-repeat="map in maps">
+				<a href="javascript:void(0);" ng-click="mapId = map._id; initMap(mapId, mapOptions);">{{map.title}}</a>
+			</li>
+		</ul>
+	</nav>
+
+	<article id="reports-count">
+		<span class="count">{{contents.length}}</span>
+		<span class="label" translate>reports</span>
+	</article>
+
 	<div ng-controller="FeatureCtrl">
 		<div class="map-container">
 			<div id="map"></div>
@@ -11,26 +24,17 @@
 	<div class="section-title">
 		<div class="container">
 			<div class="twelve columns">
-				<h3>Últimos relatos</h3>
+				<h3 translate>Latest reports</h3>
 			</div>
 		</div>
 	</div>
 	<div ng-controller="ContentCtrl" class="content row">
 		<div class="container">
 			<ul class="list-posts row">
-				<li class="four columns" ng-repeat="content in contents">
+				<li class="four columns" ng-repeat="content in latestReports">
 					<div ng-include="templates.list" autoscroll="false"></div>
 				</li>
 			</ul>
-		</div>
-	</div>
-</section>
-<section id="contents">
-	<div ng-controller="MapActionsCtrl" class="content row">
-		<div class="container">
-			<div class="three columns" ng-repeat="map in maps">
-				<div ng-include="templates.list" autoscroll="false"></div>
-			</div>
 		</div>
 	</div>
 </section>

@@ -50,6 +50,8 @@
 	},
 	"napa": {
 		"angular": "angular/bower-angular",
+		"angular-cookies": "angular/bower-angular-cookies",
+		"angular-translate": "angular-translate/bower-angular-translate",
 		"angular-route": "angular/bower-angular-route",
 		"angular-sanitize": "angular/bower-angular-sanitize",
 		"angular-resource": "angular/bower-angular-resource",

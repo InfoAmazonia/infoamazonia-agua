@@ -45,11 +45,12 @@ var settings = angular.extend({
  * App
  */
 angular.module('mapasColetivos', [
+	'ngCookies',
+	'pascalprecht.translate',
 	'ui.router',
 	'ui.keypress',
 	'ui.slider',
 	'monospaced.elastic',
-	'ngRoute',
 	'ngAnimate',
 	'infinite-scroll',
 	'colorpicker.module',
@@ -71,6 +72,12 @@ angular.module('mapasColetivos', [
 ])
 .value('config', settings)
 .value('apiPrefix', (settings.server == 'local' ? '' : settings.server) + settings.apiPrefix)
+
+/*
+ * Translation
+ */
+
+.config(require('./core/i18n'))
 
 /*
  * Core routes
@@ -138,33 +145,6 @@ angular.module('mapasColetivos', [
 			});
 
 		$locationProvider.html5Mode(true);
-
-		var interceptor = ['$rootScope', '$q', '$location', function(scope, $q, $location) {
-
-			function success(response) {
-				return response;
-			}
-
-			function error(response) {
-
-				var status = response.status;
-
-				if (status == 401) {
-					$location.path('/login');
-					return;
-				}
-				// otherwise
-				return $q.reject(response);
-
-			}
-
-			return function (promise) {
-				return promise.then(success, error);
-			}
-
-		}];
-
-		$httpProvider.responseInterceptors.push(interceptor);
 
 		/*
 		 * Trailing slash rule

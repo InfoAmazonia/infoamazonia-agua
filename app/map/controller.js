@@ -32,30 +32,17 @@ exports.MapCtrl = [
 
 		$scope.initMap = function(mapId, options) {
 
+			MapService.destroy();
+
+			var features = $scope.features = null;
+			var contents = $scope.contents = null;
+
 			options = options || {};
 
 			if(!mapId)
 				return false;
 
 			var origMap;
-
-			$scope.activeObj = 'settings';
-
-			$scope.mapObj = function(objType) {
-				if($scope.activeObj == objType)
-					return 'active';
-
-				return false;
-			}
-
-			$scope.setMapObj = function(obj) {
-
-				$scope.activeObj = obj;
-				setTimeout(function() {
-					window.dispatchEvent(new Event('resize'));
-				}, 100);
-
-			}
 
 			$scope.isEditing = function() {
 				return $location.path().indexOf('edit') !== -1;
@@ -246,8 +233,8 @@ exports.MapCtrl = [
 				};
 
 				$scope.setupMapContent = function() {
-					var contents = [];
-					var features = [];
+					contents = $scope.contents = [];
+					features = $scope.features = [];
 					angular.forEach($scope.layers, function(layer) {
 						angular.forEach(layer.features, function(lF) {
 							lF.layer = layer;
@@ -449,6 +436,27 @@ exports.MapCtrl = [
 		} else if($stateParams.mapId) {
 
 			$scope.initMap($stateParams.mapId);
+
+			$scope.activeObj = 'settings';
+
+			if($scope.isEditing()) {
+
+				$scope.mapObj = function(objType) {
+					if($scope.activeObj == objType)
+						return 'active';
+
+					return false;
+				}
+
+				$scope.setMapObj = function(obj) {
+
+					$scope.activeObj = obj;
+					setTimeout(function() {
+						window.dispatchEvent(new Event('resize'));
+					}, 100);
+
+				}
+			}
 
 			$scope.$on('map.feature.click', function(event, marker) {
 

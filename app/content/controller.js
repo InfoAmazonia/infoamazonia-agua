@@ -121,12 +121,12 @@ exports.ContentCtrl = [
 			var contentCreatorId = content.creator._id ? content.creator._id : content.creator;
 
 			// User is content owner
-			if(contentCreatorId == Session.user._id) {
+			if(contentCreatorId == Session.user()._id) {
 				return true;
 			}
 
 			// User is layer owner
-			if(layer.creator._id == Session.user._id) {
+			if(layer.creator._id == Session.user()._id) {
 				return true;
 			}
 

@@ -95,7 +95,9 @@ angular.module('mapasColetivos.leaflet', [])
 				if(layer.type == 'TileLayer') {
 					var layer = this.addTileLayer(layer.url);
 					layer.on('load', _.once(function() {
-						legendControl.addLegend(layer._tilejson.legend);
+						if(layer._tilejson) {
+							legendControl.addLegend(layer._tilejson.legend);
+						}
 					}));
 					groups.push(layer);
 				} else {
@@ -180,12 +182,14 @@ angular.module('mapasColetivos.leaflet', [])
 				this.clearGroups();
 			},
 			destroy: function() {
-				this.clearAll();
-				baseLayer = L.mapbox.tileLayer('infoamazonia.h17kafbd');
-				legendControl = L.mapbox.legendControl();
-				if(map instanceof L.Map)
-					map.remove();
-				map = null;
+				if(map) {
+					this.clearAll();
+					baseLayer = L.mapbox.tileLayer('infoamazonia.h17kafbd');
+					legendControl = L.mapbox.legendControl();
+					if(map instanceof L.Map)
+						map.remove();
+					map = null;
+				}
 			}
 		}
 	}

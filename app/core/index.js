@@ -3,13 +3,16 @@
 angular.module('mapasColetivos.index', [])
 
 .controller('IndexCtrl', [
+	'$rootScope',
 	'$scope',
+	'$filter',
 	'SessionService',
 	'$location',
 	'MapData',
 	'ContentData',
 	'Content',
-	function($scope, Session, $location, MapData, ContentData, Content) {
+	'Feature',
+	function($rootScope, $scope, $filter, Session, $location, MapData, ContentData, Content, Feature) {
 
 		$scope.$session = Session;
 
@@ -27,8 +30,41 @@ angular.module('mapasColetivos.index', [])
 			angular.element('html').removeClass('landing');
 		});
 
-		// Contents
+		// Latest contents
 		$scope.latestReports = ContentData;
+
+		// Map content filtering
+
+		$scope.$on('data.ready', function(e, map) {
+
+			$scope.mapContents = jQuery.extend([], Content.get());
+			$scope.mapFeatures = jQuery.extend([], Feature.get());
+
+		 	$scope.contents = jQuery.extend(Content.get());
+
+			$scope.$watch('contentsFilter', function(text) {
+				if(text) {
+					Content.set(($filter('filter')($scope.mapContents, {title: text})));
+				} else {
+					Content.set($scope.mapContents);
+				}
+				var features = [];
+				angular.forEach(Content.get(), function(content) {
+					//console.log(content);
+					features = features.concat(Content.getFeatures(content, $scope.mapFeatures));
+				});
+				features = _.uniq(features);
+				Feature.set(features);
+				$rootScope.$broadcast('features.updated', Feature.get());
+			});
+
+		});
+
+		$scope.$watch(function() {
+			return Content.get();
+		}, function(contents) {
+			$scope.contents = contents;
+		});
 
 		// Maps
 

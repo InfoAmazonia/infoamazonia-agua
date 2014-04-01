@@ -89,8 +89,8 @@ exports.MapCtrl = [
 						destroyConfirmation();
 					});
 
-					Layer.resource.query({
-						creatorOnly: true
+					Layer.resource.userLayers({
+						perPage: null
 					}, function(res) {
 
 						$scope.userLayers = res.layers;
@@ -162,8 +162,6 @@ exports.MapCtrl = [
 					MapService.clearAll();
 
 					$scope.layers = [];
-
-					$scope.contents = [];
 
 					angular.forEach(layers, function(layerId) {
 

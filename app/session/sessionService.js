@@ -44,16 +44,27 @@ module.exports = [
 			},
 			register: function(user) {
 				$http
-					.post(apiPrefix + '/users', user)
+					.post(apiPrefix + '/users', _.extend({ callback_url: config.siteUrl + '/login/' }, user))
 					.success(function(data, status, headers, config) {
-						console.log(data);
+						$location.path('/login/');
+					});
+			},
+			forgot_pwd: function(user) {
+				$http
+					.post(apiPrefix + '/forgot_password', _.extend({ callback_url: config.siteUrl + '/login/' }, user))
+					.success(function(data, status, headers, config) {
+						$location.path('/login/');
 					});
 			},
 			logout: function() {
-				for(var key in $window.sessionStorage) {
-					delete $window.sessionStorage[key];
-				}
-				$location.path('/login/');
+				$http
+					.get(apiPrefix + '/access_token/logout')
+					.success(function() {
+						for(var key in $window.sessionStorage) {
+							delete $window.sessionStorage[key];
+						}	
+						$location.path('/login/');
+					});
 			},
 			authenticated: function() {
 				return !! $window.sessionStorage.accessToken;

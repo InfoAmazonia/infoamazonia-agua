@@ -826,7 +826,7 @@ input.no-canvas {
 #messages p {
   margin: 0;
 }
-#messages .ok {
+#messages .success {
   background: #80d478;
   border-bottom: 1px solid #5cc851;
   padding: 15px 0;

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+	siteUrl: 'http://localhost',
 	server: 'local',
 	apiPrefix: '/api/v1',
 	oauth: {

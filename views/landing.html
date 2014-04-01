@@ -1,13 +1,15 @@
-<section id="stage-map" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
+<section id="stage-map">
 
 	<nav id="stage-filters">
 		<ul class="container">
 			<li class="four columns">
 				<div class="search">
+					<input type="text" ng-model="contentsFilter" placeholder="{{'Search reports' | translate}}" />
 				</div>
 			</li>
 			<li class="four columns">
 				<div class="layers">
+
 				</div>
 			</li>
 			<li class="four columns">
@@ -19,11 +21,11 @@
 
 	<article id="reports-count">
 		<span class="count">{{contents.length}}</span>
-		<span class="label" translate>reports</span>
+		<span class="label" translate>reports found</span>
 	</article>
 
 	<div ng-controller="FeatureCtrl">
-		<div class="map-container">
+		<div class="map-container" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
 			<div id="map"></div>
 		</div>
 	</div>

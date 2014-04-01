@@ -69,7 +69,9 @@ module.exports = [
 			authenticated: function() {
 				return !! $window.sessionStorage.accessToken;
 			},
-			user: function() {
+			user: function(val) {
+				if(val)
+					$window.sessionStorage = _.extend($window.sessionStorage, val);
 				return $window.sessionStorage;
 			}
 		};

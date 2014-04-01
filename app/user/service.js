@@ -6,8 +6,9 @@
 
 exports.User = [
 	'$resource',
+	'config',
 	'apiPrefix',
-	function($resource, apiPrefix) {
+	function($resource, config, apiPrefix) {
 
 		var gravatar = function(email, size) {
 
@@ -49,7 +50,13 @@ exports.User = [
 				'updateEmail': {
 					method: 'PUT',
 					loadingMessage: 'Atualizando email',
-					url: apiPrefix + '/users'
+					url: apiPrefix + '/users',
+					transformRequest: function(data) {
+						if(data.email) {
+							data.callback_url = config.siteUrl;
+						}
+						return JSON.stringify(data);
+					}
 				},
 				'updatePwd': {
 					method: 'PUT',

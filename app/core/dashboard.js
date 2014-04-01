@@ -50,8 +50,15 @@ angular.module('mapasColetivos.dashboard', [])
 
 		$scope.$watch('$session.user()', function(user) {
 			if(user) {
-				$scope.user = user;
-				$scope.user.grvtr = User.gravatar($scope.user.email, 100);
+				$scope.user = angular.copy(user);
+				$scope.userName = angular.copy(user.name);
+			}
+		});
+
+		$scope.$on('user.save.success', function(event, user) {
+			if(user) {
+				$scope.user = angular.copy(user);
+				$scope.userName = angular.copy(user.name);
 			}
 		});
 

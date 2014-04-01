@@ -6,19 +6,22 @@ exports.UserCtrl = [
 	'$state',
 	'$stateParams',
 	'User',
+	'SessionService',
 	'ChangePwd',
 	'ChangeEmail',
 	'Layer',
 	'Map',
 	'Page',
 	'MessageService',
-	function($scope, $rootScope, $state, $stateParams, User, ChangePwd, ChangeEmail, Layer, Map, Page, Message) {
+	function($scope, $rootScope, $state, $stateParams, User, Session, ChangePwd, ChangeEmail, Layer, Map, Page, Message) {
 
 		$scope.save = function(user) {
 
 			User.resource.update({userId: user._id}, user, function(res) {
 
 				$rootScope.$broadcast('user.save.success', user);
+
+				Session.user(user);
 
 			}, function(err) {
 

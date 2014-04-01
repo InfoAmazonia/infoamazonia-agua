@@ -46,6 +46,11 @@ angular.module('mapasColetivos.index', [])
 			$scope.mapContents = jQuery.extend([], Content.get());
 			$scope.mapFeatures = jQuery.extend([], Feature.get());
 
+			// Remove layer data from content (circular reference)
+			angular.forEach($scope.mapContents, function(content) {
+				delete content.layer;
+			});
+
 		 	$scope.contents = jQuery.extend([], Content.get());
 
 		 	var filteredContents = {};
@@ -105,7 +110,7 @@ angular.module('mapasColetivos.index', [])
 
 			var destroyContentsFilter = $scope.$watch('contentsFilter', function(text) {
 				if(text) {
-					filterByContents($filter('filter')($scope.mapContents, {title: text}), 'textFilter');
+					filterByContents($filter('filter')($scope.mapContents, text), 'textFilter');
 				} else {
 					filterByContents($scope.mapContents, 'textFilter');
 				}

@@ -79,7 +79,7 @@ angular.module('mapasColetivos.index', [])
 
 				Content.set(parsedContents);
 
-				filterFeaturesByContents(contents);
+				filterFeaturesByContents(parsedContents);
 
 				// if(contents.length != $scope.mapContents.length)
 				// 	filterFeatures(contents);
@@ -100,6 +100,7 @@ angular.module('mapasColetivos.index', [])
 
 				Feature.set(features);
 				$rootScope.$broadcast('features.updated', Feature.get());
+
 		 	}
 
 			var destroyContentsFilter = $scope.$watch('contentsFilter', function(text) {

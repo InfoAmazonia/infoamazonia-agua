@@ -24,7 +24,7 @@ module.exports = [
 		return {
 			authenticate: function(credentials, callback) {
 				$http
-					.post(apiPrefix + '/access_token/local', credentials)
+					.post(apiPrefix + '/access_token/local', _.extend({ callback_url: config.siteUrl + '/login/'}, credentials))
 					.success(function(data, status, headers, config) {
 						login(data, callback);
 					});

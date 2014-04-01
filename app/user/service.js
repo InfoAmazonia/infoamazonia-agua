@@ -39,6 +39,16 @@ exports.User = [
 				'update': {
 					method: 'PUT',
 					loadingMessage: 'Atualizando usuário',
+					url: apiPrefix + '/users',
+					transformRequest: function(data) {
+						if(data.email)
+							delete data.email;
+						return JSON.stringify(data);
+					}
+				},
+				'updateEmail': {
+					method: 'PUT',
+					loadingMessage: 'Atualizando email',
 					url: apiPrefix + '/users'
 				},
 				'updatePwd': {

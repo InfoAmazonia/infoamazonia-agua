@@ -100,7 +100,7 @@ exports.UserCtrl = [
 				return false;
 			}
 
-			User.resource.update({userId: user._id}, {
+			User.resource.updateEmail({userId: user._id}, {
 				email: user.newEmail
 			});
 

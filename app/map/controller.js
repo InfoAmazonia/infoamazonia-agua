@@ -54,9 +54,9 @@ exports.MapCtrl = [
 
 				Page.setTitle(map.title);
 
-				origMap = map;
+				origMap = angular.copy(map);
 
-				$scope.map = angular.copy(map);
+				$scope.map = map;
 
 				$scope.baseUrl = '/maps/' + map._id;
 
@@ -245,6 +245,9 @@ exports.MapCtrl = [
 					});
 					Content.set(contents);
 					Feature.set(features);
+
+					$scope.map.fetchedLayers = $scope.layers;
+
 					$rootScope.$broadcast('data.ready', $scope.map);
 
 					$scope.$on('features.updated', function(event, features) {
@@ -375,8 +378,8 @@ exports.MapCtrl = [
 
 				$scope.$on('map.save.success', function(event, map) {
 					Page.setTitle(map.title);
-					origMap = map;
-					$scope.map = angular.copy(map);
+					origMap = angular.copy(map);
+					$scope.map = map;
 				});
 
 				$scope.$on('map.delete.success', function() {

@@ -9,7 +9,9 @@
 			</li>
 			<li class="four columns">
 				<div class="layers">
-
+					<select ng-model="layerFilter" ng-options="l.title for l in mapFeatureLayers">
+						<option value="">Escolha uma camada</option>
+					</select>
 				</div>
 			</li>
 			<li class="four columns">

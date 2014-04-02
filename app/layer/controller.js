@@ -163,6 +163,9 @@ exports.LayerCtrl = [
 					if(!layer.contributors)
 						layer.contributors = [];
 
+					if(!layer.categories)
+						layer.categories = [];
+
 					$scope.fitMarkerLayer = function() {
 						MapService.fitFeatureLayer();
 					}

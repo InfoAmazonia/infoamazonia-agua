@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-	'Citizen': 'Cidadão',
-	'Water': 'Água',
+	'Citizen': 'Ciudadano',
+	'Water': 'Agua',
 	'Latest reports': 'Últimos relatos',
 	'Search reports': 'Buscar relatos'
 };

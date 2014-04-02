@@ -17,6 +17,8 @@ angular.module('mapasColetivos.index', [])
 		$scope.$session = Session;
 
 		$scope.baseUrl = '';
+		
+		$scope.isHomePage = true;
 
 		$scope.$on('$stateChangeSuccess', function() {
 
@@ -116,7 +118,7 @@ angular.module('mapasColetivos.index', [])
 				}
 			});
 
-			var destroyLayerFilter = $scope.$watch('layerFilter', function(layer) {
+			var destroyLayerFilter = $scope.$watch('filters.layer', function(layer) {
 				if(layer) {
 					filterByContents(layer.contents, 'layerFilter');
 				} else {
@@ -131,15 +133,29 @@ angular.module('mapasColetivos.index', [])
 
 		});
 
+		$scope.filters = {};
+
+		$scope.filterLayer = function(layer) {
+			if($scope.filters.layer == layer)
+				$scope.filters.layer = false;
+			else
+				$scope.filters.layer = layer;
+		}
+
 		var destroyContentsWatch = $scope.$watch(function() {
 			return Content.get();
 		}, function(contents) {
 			$scope.contents = contents;
 		});
 
-		$scope.$on('$destroy', function() {
-			destroyContentsWatch();
+		var destroyFeaturesWatch = $scope.$watch(function() {
+			return Feature.get();
+		}, function(features) {
+			$scope.features = features;
 		});
+
+		$scope.$on('$destroy', destroyContentsWatch);
+		$scope.$on('$destroy', destroyFeaturesWatch);
 
 		// Maps
 

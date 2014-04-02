@@ -262,54 +262,195 @@ input.no-canvas {
 /*
  * Header
  */
-.landing #masthead {
-	background: @light-blue;
-	border-color: @blue;
-	h1 {
-		a {
-			color: rgba(255,255,255,0.8);
-			.rios {
-				margin: 20px 0 20px 10px;
-				font-size: 72px;
-				line-height: 72px;
-				display: inline-block;
-				color: #fff;
-			}
+#masthead {
+	background: #eee;
+	h1.ia-citizen {
+		font-family: 'OpenSansCondensedBold';
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		.title-text {
+			display: none;
+		}
+		img {
+			margin: 7px 15px;
 		}
 	}
-	nav ul {
-		border-color: @dark-blue;
-		li a {
-			border-color: @dark-blue;
-			background: @blue;
-			color: #fff;
-			&:hover {
-				background: @dark-blue;
-			}
+	h2.ia-citizen-project.agua {
+		a {
+			font-family: 'OpenSansCondensedBold';
+			-webkit-font-smoothing: antialiased;
+			text-rendering: optimizeLegibility;
+			margin: 20px 0;
+			font-size: 33px;
+			line-height: 33px;
+			display: inline-block;
+			color: @blue;
 		}
 	}
 }
 
+.landing #masthead {
+	h1.ia-citizen {
+		margin-top: 40px;
+		.title-text {
+			display: block;
+			float: left;
+			.ia {
+				display: block;
+				font-size: 14px;
+				line-height: 14px;
+				color: #999;
+				margin-bottom: 4px;
+			}
+			.citizen {
+				display: block;
+				font-size: 25px;
+				line-height: 30px;
+				color: #666;
+			}
+		}
+	}
+	h2.ia-citizen-project.agua {
+		a {
+			font-size: 72px;
+			line-height: 72px;
+		}
+	}
+}
+
+@filtersHeight: 70px;
+
 #stage-map {
 	width: 100%;
-	height: 600px;
 	position: relative;
-	#map {
-		position: absolute;
-		top: 100px;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
-	}
 	#stage-filters {
-		position: absolute;
-		z-index: 2;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 100px;
-		background: @dark-blue;
+		width: 100%;
+		height: @filtersHeight;
+		border-bottom: 1px solid #ccc;
+		background: #fff;
+		::-webkit-input-placeholder { color:#999; }
+		::-moz-placeholder { color:#999; } /* firefox 19+ */
+		:-ms-input-placeholder { color:#999; } /* ie */
+		input:-moz-placeholder { color:#999; }
+		li {
+			margin-bottom: 0;
+			.filter-input {
+				border-right: 1px solid #eee;
+			}
+			&:last-child {
+				.filter-input {
+					border: 0;
+				}
+			}
+		}
+		input[type=text] {
+			width: 100%;
+			background: transparent;
+			height: @filtersHeight;
+			border: 0;
+			box-sizing: border-box;
+			color: #333;
+			margin: 0;
+			font-size: 22px;
+			font-weight: 200;
+			padding: 0 20px;
+		}
+		.filter-list {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			display: table;
+			border-right: 1px solid #eee;
+			li {
+				margin: 0;
+				height: @filtersHeight;
+				vertical-align: middle;
+				padding: 0 10px;
+				text-align: center;
+				display: table-cell;
+				border-left: 1px solid #eee;
+				cursor: pointer;
+				background: #fefefe;
+				color: #999;
+				&:hover {
+					color: #fff;
+					background: @light-blue !important;
+				}
+				&.active {
+					color: #fff;
+					background: @blue;
+				}
+			}
+		}
+		select {
+			background: transparent;
+			border: 0;
+			width: 100%;
+			height: @filtersHeight;
+			color: #999;
+			margin: 0;
+			option {
+				color: #333;
+				padding: 10px;
+			}
+		}
+	}
+	#map {
+		width: 70%;
+		height: 600px;
+		float: left;
+	}
+	#stage-summary {
+		width: 30%;
+		height: 600px;
+		padding: 40px;
+		box-sizing: border-box;
+		background: #333;
+		color: #f0f0f0;
+		float: left;
+		text-align: center;
+		#main-count {
+			font-weight: 600;
+			font-size: 34px;
+			line-height: 38px;
+			color: #aaa;
+			font-family: 'OpenSansCondensedBold';
+			-webkit-font-smoothing: antialiased;
+			text-rendering: optimizeLegibility;
+			text-transform: uppercase;
+			padding-bottom: 20px;
+			margin-bottom: 20px;
+			.count {
+				color: #fff;
+				font-size: 38px;
+				padding: 0 5px;
+			}
+		}
+		#layer-count {
+			width: 100%;
+			tr {
+				border-bottom: 1px dotted #444;
+				&:last-child {
+					border-bottom: 0;
+				}
+				th {
+					text-align: right;
+					border-right: 1px dotted #444;
+					padding: 10px;
+				}
+				td {
+					width: 50%;
+					text-align: left;
+					box-sizing: border-box;
+					padding: 10px;
+					font-size: 20px;
+					line-height: 20px;
+					font-family: 'OpenSansCondensedBold';
+					-webkit-font-smoothing: antialiased;
+					text-rendering: optimizeLegibility;
+				}
+			}
+		}
 	}
 	#reports-count {
 		font-size: 100px;

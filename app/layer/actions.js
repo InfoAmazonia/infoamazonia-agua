@@ -73,6 +73,27 @@ exports.LayerActionsCtrl = [
 
 		}
 
+		$scope.addCategory = function(title, layer) {
+
+			Layer.resource.addCategory({layerId: layer._id, title: title}, function(res) {
+
+				layer.categories = res.layer.categories;
+
+				$rootScope.$broadcast('layer.category.added', layer);
+
+				$scope.newCategory = '';
+
+			});
+
+		}
+
+		$scope.removeCategory = function(category, layer) {
+
+			Layer.resource.removeCategory({layerId: layer._id, categoryTitle: category.title});
+			$rootScope.$broadcast('layer.category.removed', layer);
+
+		}
+
 		$scope.new = function() {
 
 			NewLayerBox.activate({

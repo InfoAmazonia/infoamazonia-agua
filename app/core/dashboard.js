@@ -48,18 +48,25 @@ angular.module('mapasColetivos.dashboard', [])
 
 		});
 
-		$scope.$watch('$session.user()', function(user) {
+		var setUser = function(u) {
+			var user = angular.copy(u);
+			console.log(user);
 			if(user) {
-				$scope.user = angular.copy(user);
-				$scope.userName = angular.copy(user.name);
+				User.resource.get({
+					userId: user._id
+				}, function(res) {
+
+					$scope.user = res;
+					$scope.userName = angular.copy($scope.user.name);
+
+				});
 			}
-		});
+		}
+
+		$scope.$watch('$session.user()', setUser);
 
 		$scope.$on('user.save.success', function(event, user) {
-			if(user) {
-				$scope.user = angular.copy(user);
-				$scope.userName = angular.copy(user.name);
-			}
+			setUser(user);
 		});
 
 		var stateFunctions = function() {

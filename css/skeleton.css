@@ -109,7 +109,7 @@
 
     /* Note: Design for a width of 1200px */
 
-    @media only screen and (min-width: 1200px) and (max-width: 1679px) {
+    @media only screen and (min-width: 1200px) {
         .container                                  { width: 1200px; }
         .container .column,
         .container .columns                         { margin-left: 20px; margin-right: 20px;  }

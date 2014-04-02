@@ -78,6 +78,24 @@ exports.Layer = [
 						layerId: '@layerId',
 						contributorId: '@contributorId'
 					}
+				},
+				'addCategory': {
+					url: apiPrefix + '/layers/:layerId/categories/add',
+					method: 'PUT',
+					loadingMessage: 'Adicionando categoria',
+					params: {
+						layerId: '@layerId',
+						title: '@title'
+					}
+				},
+				'removeCategory': {
+					url: apiPrefix + '/layers/:layerId/categories/remove',
+					method: 'DELETE',
+					loadingMessage: 'Removendo categoria',
+					params: {
+						layerId: '@layerId',
+						title: '@title'
+					}
 				}
 			}),
 			busy: false,

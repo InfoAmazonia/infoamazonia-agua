@@ -1,30 +1,23 @@
-<section id="stage-map">
+<section id="stage-map" class="row">
 
 	<nav id="stage-filters">
-		<ul class="container">
-			<li class="four columns">
-				<div class="search">
-					<input type="text" ng-model="contentsFilter" placeholder="{{'Search reports' | translate}}" />
+		<div class="container">
+			<div class="twelve columns">
+				<div style="width:65%;float:left;">
+					<div class="layers filter-input">
+						<ul class="filter-list">
+							<li ng-repeat="layer in mapFeatureLayers" ng-click="filterLayer(layer)" ng-class="{active: filters.layer == layer}">{{layer.title}}</li>
+						</ul>
+					</div>
 				</div>
-			</li>
-			<li class="four columns">
-				<div class="layers">
-					<select ng-model="layerFilter" ng-options="l.title for l in mapFeatureLayers">
-						<option value="">Escolha uma camada</option>
-					</select>
+				<div style="width:35%;float:left;">
+					<div class="search filter-input">
+						<input type="text" ng-model="contentsFilter" placeholder="{{'Search reports' | translate}}" />
+					</div>
 				</div>
-			</li>
-			<li class="four columns">
-				<div class="categories">
-				</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 	</nav>
-
-	<article id="reports-count">
-		<span class="count">{{contents.length}}</span>
-		<span class="label" translate>reports found</span>
-	</article>
 
 	<div ng-controller="FeatureCtrl">
 		<div class="map-container" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
@@ -32,8 +25,25 @@
 		</div>
 	</div>
 
+	<div id="stage-summary">
+		<article id="main-count">
+			<span class="count content">{{contents.length}}</span>
+			<span class="label content" translate>reports found</span>
+			<br/>
+			<span class="connector" translate>in</span>
+			<span class="count feature">{{features.length}}</span>
+			<span class="label feature" translate>locations</span>
+		</article>
+		<table id="layer-count" ng-hide="filters.layer">
+			<tr ng-repeat="layer in mapFeatureLayers">
+				<th>{{layer.title}}</th>
+				<td>123</td>
+			</tr>
+		</table>
+	</div>
+
 </section>
-<section id="contents" class="loop-section">
+<section id="contents" class="loop-section anti-row">
 	<div class="section-title">
 		<div class="container">
 			<div class="twelve columns">

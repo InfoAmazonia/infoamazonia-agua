@@ -78,7 +78,7 @@ angular.module('mapasColetivos.index', [])
 
 		 	}
 
-		 	var filterByContents = function(contents, filterKey) {
+		 	var filterByContents = function(contents, filterKey, filterFeatures) {
 
 		 		filteredContents[filterKey] = contents;
 
@@ -86,7 +86,8 @@ angular.module('mapasColetivos.index', [])
 
 				Content.set(parsedContents);
 
-				filterFeaturesByContents(parsedContents);
+				if(filterFeatures !== false)
+					filterFeaturesByContents(parsedContents);
 
 				// if(contents.length != $scope.mapContents.length)
 				// 	filterFeatures(contents);
@@ -110,21 +111,33 @@ angular.module('mapasColetivos.index', [])
 
 		 	}
 
-			var destroyContentsFilter = $scope.$watch('contentsFilter', function(text) {
+			var destroyContentsFilter = $scope.$watch('textFilter', function(text) {
 				if(text) {
-					filterByContents($filter('filter')($scope.mapContents, text), 'textFilter');
+					filterByContents($filter('filter')($scope.mapContents, text), 'text');
 				} else {
-					filterByContents($scope.mapContents, 'textFilter');
+					filterByContents($scope.mapContents, 'text');
 				}
 			});
 
 			var destroyLayerFilter = $scope.$watch('filters.layer', function(layer) {
 				if(layer) {
-					filterByContents(layer.contents, 'layerFilter');
+					filterByContents(layer.contents, 'layer');
 				} else {
-					filterByContents($scope.mapContents, 'layerFilter');
+					filterByContents($scope.mapContents, 'layer');
 				}
 			});
+
+			$scope.$on('map.feature.click', function(event, marker) {
+				$scope.$apply(function() {
+					$scope.feature = marker.mcFeature;
+					filterByContents(Feature.getContents($scope.feature, $scope.mapContents), 'feature', false);
+				});
+			});
+
+			$scope.closeFeature = function() {
+				$scope.feature = false;
+				Content.set($scope.mapContents);
+			};
 
 			$scope.$on('$destroy', function() {
 				destroyLayerFilter();
@@ -148,10 +161,32 @@ angular.module('mapasColetivos.index', [])
 			$scope.contents = contents;
 		});
 
+		$scope.counts = {};
+
+		var setCountries = function() {
+			var countries = [];
+			angular.forEach($scope.features, function(feature) {
+				angular.forEach(feature.address, function(line) {
+					if(line.type == 'country') {
+						countries.push(line);
+					}
+				})
+			});
+			$scope.countries = _.uniq(countries, function(c) { return c._id; });
+		}
+
 		var destroyFeaturesWatch = $scope.$watch(function() {
 			return Feature.get();
 		}, function(features) {
-			$scope.features = features;
+			if(features) {
+				if($scope.feature) {
+					$scope.closeFeature();
+				}
+				$scope.features = features;
+				setCountries();
+				$scope.counts.byCountry = _.countBy(features, function(f) { return f.address[0].name; });
+				console.log($scope.counts.byCountry);
+			}
 		});
 
 		$scope.$on('$destroy', destroyContentsWatch);

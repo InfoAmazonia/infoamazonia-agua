@@ -18,19 +18,21 @@
 		}
 	],
 	"scripts": {
-		"build": "npm run bundle && mkdir -p dist && ./node_modules/.bin/browserify app/app.js | ./node_modules/.bin/uglifyjs -mt > dist/app.js",
+		"build": "npm run bundle && mkdir -p dist && ./node_modules/.bin/browserify -t brfs -r csv2geojson app/app.js | ./node_modules/.bin/uglifyjs -mt > dist/app.js",
 		"bundle": "mkdir -p lib && ./node_modules/.bin/browserify app/vendor.js | ./node_modules/.bin/uglifyjs -mt > lib/vendor.js",
 		"install": "cp ./node_modules/maki/www/images/maki-sprite.png ./img/maki-sprite.png && ./node_modules/.bin/napa && npm run build",
-		"watch": "./node_modules/.bin/watchify app/app.js -o dist/app.js | ./node_modules/.bin/watch-less -d css -e .css"
+		"watch": "./node_modules/.bin/watchify -t brfs -r csv2geojson app/app.js -o dist/app.js | ./node_modules/.bin/watch-less -d css -e .css"
 
 	},
 	"dependencies": {
+		"underscore": "latest",
 		"less": "latest",
 		"leaflet": "latest",
 		"leaflet-draw": "latest",
 		"leaflet.markercluster": "latest",
 		"mapbox.js": "latest",
 		"maki": "latest",
+		"brfs": "0.0.8",
 		"togeojson": "0.5.0",
 		"csv2geojson": "3.6.1",
 		"osmtogeojson": "2.0.4",

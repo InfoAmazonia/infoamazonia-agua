@@ -5,6 +5,7 @@ module.exports = {
 	server: 'local',
 	apiPrefix: '/api/v1',
 	oauth: {
-		facebook: '' // Facebook Client ID
+		facebook: '', // Facebook Client ID
+		google: '' // Google client ID
 	}
 };

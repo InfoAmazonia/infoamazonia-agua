@@ -6,6 +6,7 @@ module.exports = [
 	'$filter',
 	'$state',
 	'$stateParams',
+	'$timeout',
 	'Map',
 	'Content',
 	'Feature',
@@ -13,7 +14,7 @@ module.exports = [
 	'MapService',
 	'User',
 	'SirTrevor',
-	function($scope, $rootScope, $filter, $state, $stateParams, Map, Content, Feature, Session, MapService, User, SirTrevor) {
+	function($scope, $rootScope, $filter, $state, $stateParams, $timeout, Map, Content, Feature, Session, MapService, User, SirTrevor) {
 
 		/* 
 		 * Helpers
@@ -46,7 +47,7 @@ module.exports = [
 			};
 
 			var go = _.extend(_.extend(states, $stateParams), state);
-			if(state.layer || state.textSearch) {
+			if(state.layer || state.textSearch || state.country || state.state || state.city) {
 				go.feature = '';
 			}
 
@@ -194,12 +195,14 @@ module.exports = [
 				return Content.get();
 			}, function(contents) {
 				$scope.contents = contents;
+				$scope.counts.byLayer = _.countBy(contents, function(c) { return c.layer.title; });
 			});
 			$scope.$on('$destroy', destroyContentsWatch);
 
 			/*
 			 * Watch features update
 			 */
+			$scope.counts = {};
 			var destroyFeaturesWatch = $scope.$watch(function() {
 				return Feature.get();
 			}, function(features) {
@@ -259,7 +262,7 @@ module.exports = [
 			$scope.textFilter = $stateParams.textSearch || '';
 
 			var destroyTextFilter = $scope.$watch('textFilter', function(text) {
-				if($state.current.url == 'filter/:textSearch/:layer/:feature/' || text)
+				if($state.current.url == 'filter/:country/:state/:city/:textSearch/:layer/:feature/' || text)
 					$scope.updateState({textSearch: text.replace(new RegExp('/', 'g'), '%2F')});
 			});
 			$scope.$on('$destroy', destroyTextFilter);
@@ -271,12 +274,6 @@ module.exports = [
 
 		});
 		$scope.$on('$destroy', destroyDataReady);
-
-		$scope.filterLayer = function(layer) {
-			$scope.updateState({layer: layer._id});
-		}
-
-		$scope.counts = {};
 
 		var setAddresses = function() {
 			var countries = [];

@@ -1,19 +1,1 @@
 <ng-include src="'/views/map/show.html'"></ng-include>
-<section id="contents" class="loop-section anti-row">
-	<div class="section-title">
-		<div class="container">
-			<div class="twelve columns">
-				<h3 translate>Latest reports</h3>
-			</div>
-		</div>
-	</div>
-	<div class="content row">
-		<div class="container">
-			<ul class="list-posts row">
-				<li class="four columns" ng-repeat="content in latestReports">
-					<div ng-include="'/views/content/list-item.html'" autoscroll="false"></div>
-				</li>
-			</ul>
-		</div>
-	</div>
-</section>

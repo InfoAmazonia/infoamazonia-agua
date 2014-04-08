@@ -58,7 +58,7 @@ module.exports = function(feature, options, map) {
 		if(feature.geometry.type !== 'Point')
 			popupOptions.autoPan = false;
 
-		var popup = L.popup(popupOptions).setContent('<h3 class="feature-title">' + feature.title + '</h3>');
+		var popup = L.popup(popupOptions).setContent('<h3 class="feature-title">' + feature.title + '</h3>' + '<p class="content-count">' + feature.contents.length + ' report(s)');
 
 		var followMousePopup = function(e) {
 			popup.setLatLng(e.latlng);

@@ -15,7 +15,50 @@ angular
 				.state('user', {
 					url: '/user/:userId/',
 					controller: 'UserCtrl',
-					templateUrl: '/views/user/show.html'
+					templateUrl: '/views/user/show.html',
+					resolve: {
+						'UserData': [
+							'$q',
+							'$stateParams',
+							'User',
+							function($q, $stateParams, User) {
+
+								var deferred = $q.defer();
+
+								User.resource.get({
+									userId: $stateParams.userId
+								}, function(res) {
+
+									deferred.resolve(res);
+
+								});
+
+								return deferred.promise;
+
+							}
+						],
+						'ContentData': [
+							'$q',
+							'Content',
+							'UserData',
+							function($q, Content, UserData) {
+
+								var deferred = $q.defer();
+
+								Content.resource.query({
+									perPage: -1,
+									userId: UserData._id
+								}, function(res) {
+
+									deferred.resolve(res.contents);
+
+								});
+
+								return deferred.promise;
+
+							}
+						]
+					}
 				})
 				.state('user.layers', {
 					url: 'layers/',

@@ -8,13 +8,17 @@
 					<div style="width:65%;float:left;">
 						<div class="layers filter-input">
 							<ul class="filter-list">
-								<li ng-repeat="l in mapFeatureLayers" ng-click="filterLayer(l)" ng-class="{active: filteredData.layer == l}">{{l.title}}</li>
+								<li ng-repeat="l in mapFeatureLayers" ng-click="updateState('layer', l._id)" ng-class="{active: filteredData.layer == l}">
+									<span translate>{{l.title}}</span>
+									<span class="count" ng-show="counts.byLayer[l.title]">{{counts.byLayer[l.title]}}</span>
+									<p class="description" ng-show="filteredData.layer == l" translate>{{l.description}}</p>
+								</li>
 							</ul>
 						</div>
 					</div>
 					<div style="width:35%;float:left;">
 						<div class="search filter-input">
-							<input type="text" ng-model="textFilter" placeholder="{{'Search reports' | translate}}" />
+							<input type="text" ng-model="textFilter" placeholder="{{'Type your search' | translate}}" />
 						</div>
 					</div>
 				</div>
@@ -30,10 +34,10 @@
 				<div class="four columns">
 					<div class="content-author">
 						<div class="author-thumb">
-							<img src="{{gravatar(content.creator.email)}}" />
+							<a href="/user/{{content.creator.username}}/"><img src="{{gravatar(content.creator.email)}}" /></a>
 						</div>
-						<h3>{{content.creator.name}}</h3>
-						<p class="author-bio">{{content.creator.bio}}</p>
+						<h3><a href="/user/{{content.creator.username}}/">{{content.creator.name}}</a></h3>
+						<a href="/user/{{content.creator.username}}/">Ver perfil</a>
 					</div>
 				</div>
 			</div>
@@ -44,6 +48,37 @@
 				<div id="map"></div>
 			</div>
 		</div>
+
+		<nav id="stage-address-filter" class="subfilter">
+			<div class="country-select">
+				<div ng-show="filteredData.country || filteredData.state || filteredData.city">
+					<p class="tip"><span translate>Selected</span>:</p>
+					<ul class="selected-list">
+						<li ng-show="filteredData.country" ng-click="updateState({'country': '', 'state': '', 'city': ''})">{{filteredData.country}}</li>
+						<li ng-show="filteredData.state" ng-click="updateState({'state': '', 'city': ''})">{{filteredData.state}}</li>
+						<li ng-show="filteredData.city" ng-click="updateState('city', '')">{{filteredData.city}}</li>
+					</ul>
+				</div>
+				<div ng-hide="countries.length == 1 || filteredData.country">
+					<p class="tip"><span translate>Filter by country</span>:</p>
+					<ul class="country-list">
+						<li ng-repeat="country in countries" ng-click="updateState('country', country.name)">{{country.name}}</li>
+					</ul>
+				</div>
+				<div ng-hide="states.length == 1 || countries.length > 1 || filteredData.state">
+					<p class="tip"><span translate>Filter by state</span>:</p>
+					<ul class="state-list">
+						<li ng-repeat="state in states" ng-click="updateState('state', state.name)">{{state.name}}</li>
+					</ul>
+				</div>
+				<div ng-hide="cities.length == 1 || states.length > 1 || filteredData.state">
+					<p class="tip"><span translate>Filter by city</span>:</p>
+					<ul class="city-list">
+						<li ng-repeat="city in cities" ng-click="updateState('city', city.name)">{{city.name}}</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
 		<div id="stage-summary">
 			<article id="main-count">
@@ -62,52 +97,34 @@
 				</div>
 			</article>
 			<div class="stage-summary-content">
-				<!--
-				<table id="layer-count" class="table-count" ng-hide="filters.layer">
-					<tr ng-repeat="layer in mapFeatureLayers">
-						<th>{{layer.title}}</th>
-						<td>{{counts.byLayer[layer.title] || 0}}</td>
-					</tr>
-				</table>
-				-->
-				<div class="counts">
-					<table id="country-count" class="table-count" ng-hide="countries.length == 1 || filteredData.country">
-						<tr ng-repeat="country in countries">
-							<th ng-click="updateState('country', country.name)">{{country.name}}</th>
-							<td>{{counts.byCountry[country.name] || 0}}</td>
-						</tr>
-					</table>
-					<table id="state-count" class="table-count" ng-hide="states.length == 1 || countries.length > 1 || filteredData.state">
-						<tr ng-repeat="state in states">
-							<th ng-click="updateState('state', state.name)">{{state.name}}</th>
-							<td>{{counts.byState[state.name] || 0}}</td>
-						</tr>
-					</table>
-					<table id="city-count" class="table-count" ng-hide="cities.length == 1 || states.length > 1 || filteredData.city">
-						<tr ng-repeat="city in cities">
-							<th ng-click="updateState('city', city.name)">{{city.name}}</th>
-							<td>{{counts.byCity[city.name] || 0}}</td>
-						</tr>
-					</table>
-				</div>
-				<div ng-show="filteredData.feature && !content">
-					<h2><span translate>Reports in</span> <strong>{{filteredData.feature.title}}</strong></h2>
-				</div>
-				<div ng-show="filteredData.layer && !filteredData.feature">
-					<h2>{{filteredData.layer.title}}</h2>
-					<p class="layer-description">{{filteredData.layer.description}}</p>
-				</div>
-				<div>
-					<div ng-show="(filteredData.feature || filteredData.layer || filteredData.country || textFilter) && !content">
+				<div ng-hide="content">
+					<p class="filtering-label" ng-show="filteredData.feature || filteredData.layer || filteredData.country || filteredData.state" translate>Viewing reports in</p>
+					<p class="filtering-label" ng-hide="filteredData.feature || filteredData.layer || filteredData.country || filteredData.state" translate>Latest reports</p>
+					<div ng-show="filteredData.feature" ng-click="updateState('feature', '')" class="filter-box">
+						{{filteredData.feature.title}}
+					</div>
+					<div ng-show="filteredData.layer && !filteredData.feature" ng-click="updateState('layer', '')" class="filter-box">
+						{{filteredData.layer.title}}
+					</div>
+					<div ng-show="filteredData.country && !filteredData.feature" ng-click="updateState({'country': '', 'state': '', 'city': ''})" class="filter-box">
+						{{filteredData.country}}
+					</div>
+					<div ng-show="filteredData.state && !filteredData.feature" ng-click="updateState({'state': '', 'city': ''})" class="filter-box">
+						{{filteredData.state}}
+					</div>
+					<div ng-show="filteredData.city && !filteredData.feature" ng-click="updateState('city', '')" class="filter-box">
+						{{filteredData.city}}
+					</div>
+					<div ng-show="!content">
 						<ul class="content-list">
 							<li ng-repeat="content in contents">
 								<div ng-include="'/views/content/list-item.html'" autoscroll="false"></div>
 							</li>
 						</ul>
 					</div>
-					<div ng-show="content">
-						<div class="single-post sidebar-block active" ng-include="'/views/content/show.html'"></div>
-					</div>
+				</div>
+				<div ng-show="content">
+					<div class="single-post sidebar-block active" ng-include="'/views/content/show.html'"></div>
 				</div>
 			</div>
 		</div>

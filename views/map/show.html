@@ -96,6 +96,10 @@
 					<p class="not-found" translate>Nothing found</p>
 				</div>
 			</article>
+			<section id="share" ng-controller="MapActionsCtrl">
+				<a href="javascript:void(0);" ng-click="embed(baseUrl, params)" translate>Embed map</a>
+				<a href="javascript:void(0);" ng-click="getDownload()" translate>Download GeoJSON</a>
+			</section>
 			<div class="stage-summary-content">
 				<div ng-hide="content">
 					<p class="filtering-label" ng-show="filteredData.feature || filteredData.layer || filteredData.country || filteredData.state" translate>Viewing reports in</p>

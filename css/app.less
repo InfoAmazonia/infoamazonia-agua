@@ -631,7 +631,7 @@ input.no-canvas {
 	#stage-summary {
 		width: 30%;
 		height: 600px;
-		padding: 90px 12px 40px 40px;
+		padding: 90px 12px 70px 40px;
 		box-sizing: border-box;
 		background: #f9f9f9;
 		border-left: 1px solid #e0e0e0;
@@ -721,6 +721,29 @@ input.no-canvas {
 				color: #666;
 				font-size: 38px;
 				padding: 0 5px;
+			}
+		}
+		#share {
+			position: absolute;
+			bottom: 0;
+			display: table;
+			width: 100%;
+			.box-sizing(border-box);
+			padding-right: 27px;
+			a {
+				display: table-cell;
+				width: 1%;
+				text-align: center;
+				padding: 10px 0;
+				background: #333;
+				color: #fff;
+				border-right: 1px solid #f9f9f9;
+				text-transform: uppercase;
+				font-weight: 600;
+				font-size: 10px;
+				&:hover {
+					background: #555;
+				}
 			}
 		}
 		.table-count {

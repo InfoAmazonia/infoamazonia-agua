@@ -55,6 +55,7 @@ angular
 	])
 	.factory('Map', require('./service').Map)
 	.factory('MapShare', require('./share').shareService)
+	.factory('MapEmbed', require('./embed'))
 	.controller('MapCtrl', require('./controller').MapCtrl)
 	.controller('MapActionsCtrl', require('./actions').MapActionsCtrl)
 	.controller('MapFilterCtrl', require('./filters'));

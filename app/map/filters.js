@@ -29,6 +29,8 @@ module.exports = [
 
 		var parentState = $state.current.name.split('.')[0];
 
+		$scope.params = $stateParams;
+
 		$scope.updateState = function(state, value) {
 
 			if(typeof state == 'string') {

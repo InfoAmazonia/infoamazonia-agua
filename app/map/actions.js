@@ -9,17 +9,21 @@ exports.MapActionsCtrl = [
 	'$scope',
 	'$q',
 	'$location',
+	'config',
 	'MessageService',
 	'SessionService',
 	'Map',
 	'MapShare',
-	function($rootScope, $scope, $q, $location, Message, Session, Map, MapShare) {
+	'MapEmbed',
+	function($rootScope, $scope, $q, $location, config, Message, Session, Map, MapShare, MapEmbed) {
 
 		$scope.$session = Session;
 
 		$scope.$watch('$session.user()', function(user) {
 			$scope.user = user;
 		});
+
+		$scope.config = config;
 
 		$scope.getUrl = function(map) {
 
@@ -123,6 +127,27 @@ exports.MapActionsCtrl = [
 		$scope.templates = {
 			list: '/views/map/list-item.html'
 		};
+
+		$scope.embed = function(baseUrl, params) {
+			MapEmbed.activate({
+				baseUrl: baseUrl,
+				params: params,
+				stringParams: function() {
+					var str = '';
+					for(var prop in params) {
+						str += params[prop] + '/';
+					}
+					return str;
+				},
+				close: function() {
+					MapShare.deactivate();
+				}
+			});
+
+			$scope.$on('$destroy', function() {
+				MapEmbed.deactivate();
+			});
+		}
 
 	}
 ];

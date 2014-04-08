@@ -15,11 +15,17 @@ exports.User = [
 			if(typeof size === 'undefined')
 				size = 100;
 
-			return grvtr.create(email, {
-				size: size,
-				defaultImage: 'mm',
-				rating: 'g'
-			});
+			if(typeof email !== 'undefined') {
+
+				return grvtr.create(email, {
+					size: size,
+					defaultImage: 'mm',
+					rating: 'g'
+				});
+
+			}
+
+			return '';
 		}
 
 		return {

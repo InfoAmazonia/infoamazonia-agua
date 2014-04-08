@@ -24,7 +24,10 @@ angular
 					templateUrl: '/views/signup.html'
 				});
 
-			FacebookProvider.init(require('../config').oauth.facebook);
+			var config = require('../config');
+
+			if(config.oauth && config.oauth.facebook)
+				FacebookProvider.init(config.oauth.facebook);
 
 		}
 	])

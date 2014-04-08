@@ -50,7 +50,6 @@ angular.module('mapasColetivos.dashboard', [])
 
 		var setUser = function(u) {
 			var user = angular.copy(u);
-			console.log(user);
 			if(user) {
 				User.resource.get({
 					userId: user._id

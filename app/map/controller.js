@@ -248,16 +248,22 @@ exports.MapCtrl = [
 
 					$scope.map.fetchedLayers = $scope.layers;
 
-					$rootScope.$broadcast('data.ready', $scope.map);
+					var prevFeatures;
 
-					$scope.$on('features.updated', function(event, features) {
+					$scope.$on('map.features.updated', function(event, features) {
 
-						filterFeatures(features);
+						if(!angular.equals(features, prevFeatures)) {
+							filterFeatures(features);
+						}
+
+						prevFeatures = features;
 
 					});
+
+					$rootScope.$broadcast('data.ready', $scope.map);
 				};
 
-				var filterFeatures = function(features) {
+				var filterFeatures = _.debounce(function(features) {
 
 					var filteredGroup = L.featureGroup();
 					var map = MapService.get();
@@ -286,14 +292,13 @@ exports.MapCtrl = [
 
 					});
 
-					if(map && features.length !== markers.length) {
-						//map.fitBounds(filteredGroup.getBounds());
-					}
-					else {
+					if(features.length) {
+						map.fitBounds(filteredGroup.getBounds());
+					} else {
 						map.setView($scope.map.center, $scope.map.zoom);
 					}
 
-				}
+				}, 100);
 
 				$scope.hideAllLayers = function() {
 
@@ -458,22 +463,6 @@ exports.MapCtrl = [
 
 				}
 			}
-
-			$scope.$on('map.feature.click', function(event, marker) {
-
-				if(!$scope.isEditing()) {
-
-					$state.go('singleMap.feature', {
-						featureId: marker.mcFeature._id
-					});
-
-				} else {
-
-					// Do something?
-
-				}
-
-			})
 
 		} else {
 

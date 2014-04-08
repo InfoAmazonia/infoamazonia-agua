@@ -1,75 +1,4 @@
-<section id="stage-map" class="row">
-
-	<nav id="stage-filters">
-		<div class="container">
-			<div class="twelve columns">
-				<div style="width:65%;float:left;">
-					<div class="layers filter-input">
-						<ul class="filter-list">
-							<li ng-repeat="layer in mapFeatureLayers" ng-click="filterLayer(layer)" ng-class="{active: filters.layer == layer}">{{layer.title}}</li>
-						</ul>
-					</div>
-				</div>
-				<div style="width:35%;float:left;">
-					<div class="search filter-input">
-						<input type="text" ng-model="textFilter" placeholder="{{'Search reports' | translate}}" />
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
-
-	<div ng-controller="FeatureCtrl">
-		<div class="map-container" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
-			<div id="map"></div>
-		</div>
-	</div>
-
-	<div id="stage-summary">
-		<article id="main-count">
-			<div class="count-item" title="{{'Locations' | translate}}" ng-hide="feature">
-				<span class="mcf">&#xE600;</span>
-				<span class="count content">{{features.length}}</span>
-			</div>
-			<div class="count-item" title="{{'Reports' | translate}}">
-				<span class="lsf">&#xe101;</span>
-				<span class="count feature">{{contents.length}}</span>
-			</div>
-		</article>
-		<div class="stage-summary-content">
-			<!--
-			<table id="layer-count" class="table-count" ng-hide="filters.layer">
-				<tr ng-repeat="layer in mapFeatureLayers">
-					<th>{{layer.title}}</th>
-					<td>{{counts.byLayer[layer.title] || 0}}</td>
-				</tr>
-			</table>
-			-->
-			<div  ng-hide="feature || content || filters.layer">
-				<h3>Reported locations</h3>
-				<table id="country-count" class="table-count">
-					<tr ng-repeat="country in countries">
-						<th>{{country.name}}</th>
-						<td>{{counts.byCountry[country.name] || 0}}</td>
-					</tr>
-				</table>
-			</div>
-			<div ng-show="feature">
-				<h2><span translate>Reports in</span> <strong>{{feature.title}}</strong></h2>
-			</div>
-			<div ng-show="filters.layer">
-				<p class="layer-description">{{filters.layer.description}}</p>
-			</div>
-			<div ng-show="feature || filters.layer" ng-controller="ContentCtrl">
-				<ul class="content-list">
-					<li ng-repeat="content in contents">
-						<div ng-include="templates.list" autoscroll="false"></div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</section>
+<ng-include src="'/views/map/show.html'"></ng-include>
 <section id="contents" class="loop-section anti-row">
 	<div class="section-title">
 		<div class="container">
@@ -78,11 +7,11 @@
 			</div>
 		</div>
 	</div>
-	<div ng-controller="ContentCtrl" class="content row">
+	<div class="content row">
 		<div class="container">
 			<ul class="list-posts row">
 				<li class="four columns" ng-repeat="content in latestReports">
-					<div ng-include="templates.list" autoscroll="false"></div>
+					<div ng-include="'/views/content/list-item.html'" autoscroll="false"></div>
 				</li>
 			</ul>
 		</div>

@@ -1,74 +1,115 @@
-<div class="map-view" ng-controller="MapViewCtrl" ng-class="{withSidebar: mapView.sidebar()}">
-	<div class="map-header">
-		<div id="map-info" class="map-info" ng-class="{withBackButton: mapView.backLink()}">
-			<a class="back lsf" title="Voltar" href="javascript:void(0);" ng-click="mapView.goBack()" ng-show="mapView.backLink()"><span>&#xE133;</span></a>
-			<h1>{{map.title}}</h1>
-			<p class="author">por <a href="/user/{{map.creator.username}}/">{{map.creator.name}}</a></p>
-		</div>
-	</div>
-	<div id="map-controls" class="map-controls" ng-controller="MapActionsCtrl">
-		<ul>
-			<li ng-show="canEdit(map)">
-				<a href="/maps/{{map._id}}/edit" title="Editar">
-					<span class="lsf">&#xE09f;</span>
-					<span class="label">Editar</span>
-				</a>
-			</li>
-			<li ng-show="canEdit(map)">
-				<a href="javascript:void(0);" ng-click="delete(map)" title="Editar">
-					<span class="lsf">&#xE12c;</span>
-					<span class="label">Remover</span>
-				</a>
-			</li>
-			<li ng-show="map.visibility !== 'Private' || canEdit(map)">
-				<a href="javascript:void(0);" ng-click="share(map)" title="Compartilhar">
-					<span class="lsf">&#xE118;</span>
-					<span class="label">Compartilhar</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-	<div ng-controller="FeatureCtrl">
-		<div class="map-container">
-			<div id="map"></div>
-		</div>
-		<div id="map-sidebar" ng-controller="ContentCtrl">
-			<div class="map-sidebar-content">
-				<div id="map-info" class="sidebar-block main-info" ng-show="map.description && !feature && !content">
-					<p class="label">Sobre este mapa</p>
-					<p dynamic="map.description"></p>
-				</div>
-				<div ng-show="feature" ng-controller="FeatureCtrl">
-					<div class="sidebar-block label-block">
-						<h3>Local <a class="close" href="{{baseUrl}}">Voltar para o mapa</a></h3>
-					</div>
-					<div id="feature-info" class="single-feature sidebar-block" ng-include="templates.show"></div>
-				</div>
-				<div id="posts" ng-show="contents.length">
-					<div ng-show="content">
-						<div class="sidebar-block label-block">
-							<h3>Conteúdo <a class="close" href="{{baseUrl}}">Voltar para o mapa</a></h3>
+<section id="stage-map" class="row" ng-controller="MapFilterCtrl">
+
+	<div ng-class="{reading: reading}">
+
+		<nav id="stage-filters">
+			<div class="container">
+				<div class="twelve columns">
+					<div style="width:65%;float:left;">
+						<div class="layers filter-input">
+							<ul class="filter-list">
+								<li ng-repeat="l in mapFeatureLayers" ng-click="filterLayer(l)" ng-class="{active: filteredData.layer == l}">{{l.title}}</li>
+							</ul>
 						</div>
-						<div class="single-post sidebar-block active" ng-include="templates.show"></div>
 					</div>
-					<div ng-hide="content">
-						<div class="sidebar-block label-block">
-							<h3>Conteúdo do mapa</h3>
+					<div style="width:35%;float:left;">
+						<div class="search filter-input">
+							<input type="text" ng-model="textFilter" placeholder="{{'Search reports' | translate}}" />
 						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div id="content-title" class="section-title" ng-show="content">
+			<div class="container">
+				<div class="eight columns">
+					<p class="layer">{{content.layer.title}}</p>
+					<h2>{{content.title}}</h2>
+				</div>
+				<div class="four columns">
+					<div class="content-author">
+						<div class="author-thumb">
+							<img src="{{gravatar(content.creator.email)}}" />
+						</div>
+						<h3>{{content.creator.name}}</h3>
+						<p class="author-bio">{{content.creator.bio}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-controller="FeatureCtrl">
+			<div class="map-container" ng-controller="MapCtrl" ng-init="initMap(mapId, mapOptions)">
+				<div id="map"></div>
+			</div>
+		</div>
+
+		<div id="stage-summary">
+			<article id="main-count">
+				<div ng-show="contents.length">
+					<div class="count-item" title="{{'Locations' | translate}}" ng-hide="feature">
+						<span class="mcf">&#xE600;</span>
+						<span class="count content">{{features.length}}</span>
+					</div>
+					<div class="count-item" title="{{'Reports' | translate}}">
+						<span class="lsf">&#xe101;</span>
+						<span class="count feature">{{contents.length}}</span>
+					</div>
+				</div>
+				<div ng-hide="contents.length">
+					<p class="not-found" translate>Nothing found</p>
+				</div>
+			</article>
+			<div class="stage-summary-content">
+				<!--
+				<table id="layer-count" class="table-count" ng-hide="filters.layer">
+					<tr ng-repeat="layer in mapFeatureLayers">
+						<th>{{layer.title}}</th>
+						<td>{{counts.byLayer[layer.title] || 0}}</td>
+					</tr>
+				</table>
+				-->
+				<div class="counts">
+					<table id="country-count" class="table-count" ng-hide="countries.length == 1 || filteredData.country">
+						<tr ng-repeat="country in countries">
+							<th ng-click="updateState('country', country.name)">{{country.name}}</th>
+							<td>{{counts.byCountry[country.name] || 0}}</td>
+						</tr>
+					</table>
+					<table id="state-count" class="table-count" ng-hide="states.length == 1 || countries.length > 1 || filteredData.state">
+						<tr ng-repeat="state in states">
+							<th ng-click="updateState('state', state.name)">{{state.name}}</th>
+							<td>{{counts.byState[state.name] || 0}}</td>
+						</tr>
+					</table>
+					<table id="city-count" class="table-count" ng-hide="cities.length == 1 || states.length > 1 || filteredData.city">
+						<tr ng-repeat="city in cities">
+							<th ng-click="updateState('city', city.name)">{{city.name}}</th>
+							<td>{{counts.byCity[city.name] || 0}}</td>
+						</tr>
+					</table>
+				</div>
+				<div ng-show="filteredData.feature && !content">
+					<h2><span translate>Reports in</span> <strong>{{filteredData.feature.title}}</strong></h2>
+				</div>
+				<div ng-show="filteredData.layer && !filteredData.feature">
+					<h2>{{filteredData.layer.title}}</h2>
+					<p class="layer-description">{{filteredData.layer.description}}</p>
+				</div>
+				<div>
+					<div ng-show="(filteredData.feature || filteredData.layer || filteredData.country || textFilter) && !content">
 						<ul class="content-list">
-							<li class="sidebar-block" ng-repeat="content in contents" ng-include="templates.list"></li>
+							<li ng-repeat="content in contents">
+								<div ng-include="'/views/content/list-item.html'" autoscroll="false"></div>
+							</li>
 						</ul>
 					</div>
-				</div>
-				<div id="features" ng-show="!contents.length && !feature" ng-controller="FeatureCtrl">
-					<div class="sidebar-block label-block">
-						<h3>Locais</h3>
+					<div ng-show="content">
+						<div class="single-post sidebar-block active" ng-include="'/views/content/show.html'"></div>
 					</div>
-					<ul class="feature-list">
-						<li class="sidebar-block" ng-repeat="feature in features" ng-include="templates.list"></li>
-					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</section>

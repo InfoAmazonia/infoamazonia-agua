@@ -34,11 +34,17 @@ angular
 					controller: 'MapCtrl',
 					templateUrl: '/views/map/show.html'
 				})
+				.state('singleMap.filter', {
+					url: 'filter/:country/:state/:city/:textSearch/:layer/:feature/'
+				})
 				.state('singleMap.content', {
 					url: 'content/:contentId/'
 				})
 				.state('singleMap.feature', {
 					url: 'feature/:featureId/'
+				})
+				.state('singleMap.layer', {
+					url: 'layer/:layerId/'
 				})
 				.state('editMap', {
 					url: '/maps/:mapId/edit/',
@@ -50,4 +56,5 @@ angular
 	.factory('Map', require('./service').Map)
 	.factory('MapShare', require('./share').shareService)
 	.controller('MapCtrl', require('./controller').MapCtrl)
-	.controller('MapActionsCtrl', require('./actions').MapActionsCtrl);
+	.controller('MapActionsCtrl', require('./actions').MapActionsCtrl)
+	.controller('MapFilterCtrl', require('./filters'));

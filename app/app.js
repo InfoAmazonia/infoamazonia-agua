@@ -142,6 +142,33 @@ angular.module('mapasColetivos', [
 						}
 					]
 				}
+			})
+			.state('home.filter', {
+				url: 'filter/:country/:state/:city/:textSearch/:layer/:feature/'
+			})
+			.state('home.content', {
+				url: 'content/:contentId/',
+				controller: 'IndexContentCtrl',
+				resolve: {
+					'SingleContent': [
+						'$q',
+						'Content',
+						'$stateParams',
+						function($q, Content, $stateParams) {
+
+							var deferred = $q.defer();
+
+							Content.resource.get({
+								contentId: $stateParams.contentId
+							}, function(res) {
+								deferred.resolve(res);
+							});
+
+							return deferred.promise;
+
+						}
+					]
+				}
 			});
 
 		$locationProvider.html5Mode(true);

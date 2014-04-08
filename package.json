@@ -42,6 +42,7 @@
 		"grvtr": "latest",
 		"browserify": "3.33.1",
 		"uglify-js": "latest",
+		"eventablejs": "latest",
 		"napa": "latest"
 	},
 	"devDependencies": {
@@ -66,7 +67,6 @@
 		"angular-facebook": "Ciul/angular-facebook",
 		"angular-gplus": "sirkitree/angular-directive.g-signin",
 		"ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
-		"eventable": "madebymany/eventable",
 		"sir-trevor": "madebymany/sir-trevor-js",
 		"bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
 	},

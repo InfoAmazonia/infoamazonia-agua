@@ -1,19 +1,11 @@
 <div class="regular-page profile-page">
-	<div class="profile-header row">
+	<div>
 		<div class="container">
-			<div class="two columns">
+			<div class="four columns">
 				<img src="{{user.gravatar(240)}}" alt="{{user.name}}" />
-			</div>
-			<div class="five columns">
 				<h1>
 					<span class="user-name">{{user.name}}</span>
 				</h1>
-			</div>
-		</div>
-	</div>
-	<div ui-view autoscroll="false">
-		<div class="container">
-			<div class="four columns">
 				<p class="bio" ng-show="user.bio">{{user.bio}}</p>
 			</div>
 			<div class="eight columns">

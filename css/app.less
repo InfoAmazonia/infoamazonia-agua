@@ -343,6 +343,27 @@ input.no-canvas {
 			color: @blue;
 		}
 	}
+	#lang {
+		ul {
+			margin: 20px 0;
+			padding: 0;
+			float: right;
+			li {
+				float: left;
+				margin: 0 10px 0 0;
+				padding: 0;
+				text-transform: lowercase;
+				color: #999;
+				border-bottom: 1px solid @light-blue;
+				cursor: pointer;
+				padding-bottom: 5px;
+				&:hover {
+					color: #333;
+					border-color: @blue;
+				}
+			}
+		}
+	}
 }
 
 .landing #masthead {
@@ -472,6 +493,7 @@ input.no-canvas {
 					width: 400px;
 					text-align: left;
 					font-weight: 200;
+					display: none;
 				}
 				&:last-child,
 				&:nth-child(-n-3) {
@@ -483,6 +505,9 @@ input.no-canvas {
 				&:hover {
 					color: #fff;
 					background: @light-blue !important;
+					.description {
+						display: block;
+					}
 				}
 				&.active {
 					color: #fff;

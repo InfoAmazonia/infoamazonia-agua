@@ -78,6 +78,17 @@ angular.module('mapasColetivos', [
  */
 
 .config(require('./core/i18n'))
+.controller('TranslateCtrl', [
+	'$scope',
+	'$translate',
+	function($scope, $translate) {
+
+		$scope.changeLanguage = function(key) {
+			$translate.use(key);
+		}
+
+	}
+])
 
 /*
  * Core routes

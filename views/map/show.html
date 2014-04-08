@@ -11,7 +11,7 @@
 								<li ng-repeat="l in mapFeatureLayers" ng-click="updateState('layer', l._id)" ng-class="{active: filteredData.layer == l}">
 									<span translate>{{l.title}}</span>
 									<span class="count" ng-show="counts.byLayer[l.title]">{{counts.byLayer[l.title]}}</span>
-									<p class="description" ng-show="filteredData.layer == l" translate>{{l.description}}</p>
+									<p class="description" translate>{{l.description}}</p>
 								</li>
 							</ul>
 						</div>

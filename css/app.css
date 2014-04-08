@@ -284,6 +284,25 @@ input.no-canvas {
   display: inline-block;
   color: #4e93d4;
 }
+#masthead #lang ul {
+  margin: 20px 0;
+  padding: 0;
+  float: right;
+}
+#masthead #lang ul li {
+  float: left;
+  margin: 0 10px 0 0;
+  padding: 0;
+  text-transform: lowercase;
+  color: #999;
+  border-bottom: 1px solid #77acde;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+#masthead #lang ul li:hover {
+  color: #333;
+  border-color: #4e93d4;
+}
 .landing #masthead h1.ia-citizen {
   margin-top: 40px;
 }
@@ -441,6 +460,7 @@ input.no-canvas {
   width: 400px;
   text-align: left;
   font-weight: 200;
+  display: none;
 }
 #stage-map #stage-filters .filter-list li:last-child .description,
 #stage-map #stage-filters .filter-list li:nth-child(-n-3) .description {
@@ -450,6 +470,9 @@ input.no-canvas {
 #stage-map #stage-filters .filter-list li:hover {
   color: #fff;
   background: #77acde !important;
+}
+#stage-map #stage-filters .filter-list li:hover .description {
+  display: block;
 }
 #stage-map #stage-filters .filter-list li.active {
   color: #fff;

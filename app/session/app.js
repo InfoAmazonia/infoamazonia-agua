@@ -24,6 +24,13 @@ angular
 					templateUrl: '/views/signup.html'
 				});
 
+			$stateProvider
+				.state('forgotPwd', {
+					url: '/forgot-password/',
+					controller: 'LoginCtrl',
+					templateUrl: '/views/forgot_pwd.html'
+				});
+
 			var config = require('../config');
 
 			if(config.oauth && config.oauth.facebook)

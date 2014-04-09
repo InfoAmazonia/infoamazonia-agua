@@ -77,6 +77,12 @@ module.exports = [
 
 		}
 
+		$scope.recoverPwd = function() {
+
+			Session.recoverPwd($scope.user);
+
+		}
+
 		$scope.logout = Session.logout;
 
 	}

@@ -49,7 +49,7 @@ module.exports = [
 						$location.path('/login/');
 					});
 			},
-			forgot_pwd: function(user) {
+			recoverPwd: function(user) {
 				$http
 					.post(apiPrefix + '/forgot_password', _.extend({ callback_url: config.siteUrl + '/login/' }, user))
 					.success(function(data, status, headers, config) {

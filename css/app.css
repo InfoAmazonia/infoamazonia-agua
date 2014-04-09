@@ -613,9 +613,11 @@ input.no-canvas {
   transition: width 0.3s ease-in-out;
 }
 #stage-map #stage-summary {
-  width: 30%;
+  width: 29.99%;
   height: 600px;
   padding: 90px 12px 70px 40px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #f9f9f9;
   border-left: 1px solid #e0e0e0;

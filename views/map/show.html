@@ -1,6 +1,6 @@
-<section id="stage-map" class="row" ng-controller="MapFilterCtrl">
+<section id="stage-map" class="row" ng-controller="MapFilterCtrl" ng-class="{reading: reading, 'not-reading': !reading}">
 
-	<div ng-class="{reading: reading}">
+	<div>
 
 		<nav id="stage-filters">
 			<div class="container">
@@ -97,7 +97,7 @@
 				</div>
 			</article>
 			<section id="share" ng-controller="MapActionsCtrl">
-				<a href="javascript:void(0);" ng-click="embed(baseUrl, params)" translate>Embed map</a>
+				<a href="javascript:void(0);" ng-click="embed(embedUrl)" translate>Embed map</a>
 				<a href="javascript:void(0);" ng-click="getDownload()" translate>Download GeoJSON</a>
 			</section>
 			<div class="stage-summary-content">

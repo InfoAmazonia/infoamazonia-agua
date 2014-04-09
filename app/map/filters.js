@@ -7,6 +7,8 @@ module.exports = [
 	'$state',
 	'$stateParams',
 	'$timeout',
+	'$location',
+	'config',
 	'Map',
 	'Content',
 	'Feature',
@@ -14,7 +16,8 @@ module.exports = [
 	'MapService',
 	'User',
 	'SirTrevor',
-	function($scope, $rootScope, $filter, $state, $stateParams, $timeout, Map, Content, Feature, Session, MapService, User, SirTrevor) {
+	'Page',
+	function($scope, $rootScope, $filter, $state, $stateParams, $timeout, $location, config, Map, Content, Feature, Session, MapService, User, SirTrevor, Page) {
 
 		/* 
 		 * Helpers
@@ -28,8 +31,6 @@ module.exports = [
 		/****/
 
 		var parentState = $state.current.name.split('.')[0];
-
-		$scope.params = $stateParams;
 
 		$scope.updateState = function(state, value) {
 
@@ -122,6 +123,8 @@ module.exports = [
 
 				$scope.filteredData = {};
 
+				Page.setTitle('');
+
 				for(var filter in toParams) {
 
 					if(toParams[filter]) {
@@ -145,10 +148,12 @@ module.exports = [
 								break;
 							case 'layer':
 								$scope.filteredData.layer = _.find($scope.mapFeatureLayers, function(l) { return l._id == toParams[filter] });
+								Page.setTitle($scope.filteredData.layer.title);
 								contents = $scope.filteredData.layer.contents;
 								break;
 							case 'feature':
 								$scope.filteredData.feature = _.find($scope.mapFeatures, function(f) { return f._id == toParams[filter] });
+								Page.setTitle($scope.filteredData.feature.title);
 								contents = Feature.getContents($scope.filteredData.feature, $scope.mapContents);
 						}
 
@@ -241,6 +246,7 @@ module.exports = [
 				if($state.current.url == 'content/:contentId/') {
 					$scope.reading = true;
 					$scope.content = _.find($scope.mapContents, function(c) { return c._id == $stateParams.contentId; });
+					Page.setTitle($scope.content.title);
 					var features = Content.getFeatures($scope.content, $scope.mapFeatures);
 					Feature.set(features);
 					$rootScope.$broadcast('map.features.updated', features);
@@ -254,6 +260,8 @@ module.exports = [
 						MapService.get().invalidateSize(true);
 					}, 400);
 				}
+
+				$scope.embedUrl = config.siteUrl + $location.path();
 
 			};
 

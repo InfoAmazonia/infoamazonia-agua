@@ -52,8 +52,6 @@ exports.MapCtrl = [
 
 				MapView.sidebar(true);
 
-				Page.setTitle(map.title);
-
 				origMap = angular.copy(map);
 
 				$scope.map = map;
@@ -445,6 +443,10 @@ exports.MapCtrl = [
 
 			$scope.activeObj = 'settings';
 
+			$scope.$on('data.ready', function(event, map) {
+				Page.setTitle(map.title);
+			});
+
 			if($scope.isEditing()) {
 
 				$scope.mapObj = function(objType) {
@@ -465,8 +467,6 @@ exports.MapCtrl = [
 			}
 
 		} else {
-
-			Page.setTitle('Mapas');
 
 			Map.resource.query(function(res) {
 				$scope.maps = res.maps;

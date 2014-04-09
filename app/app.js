@@ -231,4 +231,17 @@ angular.module('mapasColetivos', [
 		});
 
 	}
+])
+
+.controller('PageCtrl', [
+	'$scope',
+	'Page',
+	function($scope, Page) {
+		// Page title
+		$scope.page = Page;
+		// Detect iframe
+		if(window !== window.top) {
+			$scope.embedded = true;
+		}
+	}
 ]);

@@ -215,18 +215,19 @@ module.exports = [
 			 * Watch features update
 			 */
 			$scope.counts = {};
-			var destroyFeaturesWatch = $scope.$watch(function() {
-				return Feature.get();
-			}, function(features) {
+			var initFeatures = function(features) {
 				if(features) {
 					$scope.features = features;
 					setAddresses();
-					console.log('address set');
 					$scope.counts.byCountry = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'country' }); if(a) return a.name; });
 					$scope.counts.byState = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'state' }); if(a) return a.name; });
 					$scope.counts.byCity = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'city' }); if(a) return a.name; });
 				}
-			});
+			};
+			var destroyFeaturesWatch = $scope.$watch(function() {
+				return Feature.get();
+			}, initFeatures);
+			initFeatures(Feature.get());
 			$scope.$on('$destroy', destroyFeaturesWatch);
 
 			/*

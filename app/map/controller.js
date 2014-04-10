@@ -257,8 +257,9 @@ exports.MapCtrl = [
 						prevFeatures = features;
 
 					});
-
+					
 					$rootScope.$broadcast('data.ready', $scope.map);
+
 				};
 
 				var filterFeatures = _.debounce(function(features) {

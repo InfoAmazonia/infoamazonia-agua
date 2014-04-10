@@ -27,7 +27,7 @@
 
 		<div id="content-title" class="section-title" ng-show="content">
 			<div class="container">
-				<div class="eight columns">
+				<div class="seven columns">
 					<p class="layer">{{content.layer.title}}</p>
 					<h2>{{content.title}}</h2>
 				</div>
@@ -97,7 +97,7 @@
 			</article>
 			<section id="share" ng-controller="MapActionsCtrl">
 				<a href="javascript:void(0);" ng-click="embed(embedUrl)" translate>Embed map</a>
-				<a href="javascript:void(0);" ng-click="getDownload()" translate>Download GeoJSON</a>
+				<a href="javascript:void(0);" ng-click="getDownload()" ng-hide="content" translate>Download GeoJSON</a>
 			</section>
 			<div class="stage-summary-content">
 				<div ng-hide="content">

@@ -3357,7 +3357,7 @@ a.mapbox-improve-map:first-child {
 .tilelayer-modal .privacy-settings {
   margin-bottom: 20px;
 }
-/* Layer share */
+/* Share modal */
 .modal.share-modal .social {
   text-align: center;
   margin: 40px 0 0;
@@ -3377,6 +3377,39 @@ a.mapbox-improve-map:first-child {
 }
 .modal.share-modal .social a:hover {
   color: #333;
+}
+/* Embed modal */
+.modal.embed-modal h3 {
+  font-size: 10px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+}
+.modal.embed-modal .embed-setting p.setting-title {
+  font-size: 12px;
+}
+.modal.embed-modal .embed-setting label {
+  font-weight: 600;
+}
+.modal.embed-modal .embed-setting.map-dimensions .setting {
+  display: table;
+  width: 70%;
+}
+.modal.embed-modal .embed-setting.map-dimensions .setting p {
+  display: table-cell;
+  width: 1%;
+}
+.modal.embed-modal .embed-setting.map-dimensions .setting p label {
+  margin-right: 10px;
+}
+.modal.embed-modal .embed-setting.map-dimensions input {
+  width: auto;
+  min-width: 0;
+  display: inline;
+}
+.modal.embed-modal textarea {
+  width: 100%;
+  background: #eee;
+  color: #999;
 }
 /*
  * Embedded
@@ -3418,8 +3451,8 @@ html.embedded #stage-map .subfilter,
 html.embedded body #stage-map .subfilter {
   display: none !important;
 }
-html.embedded #stage-map.not-reading,
-html.embedded body #stage-map.not-reading {
+html.embedded #stage-map,
+html.embedded body #stage-map {
   position: absolute;
   top: 0;
   left: 0;
@@ -3430,29 +3463,67 @@ html.embedded body #stage-map.not-reading {
   margin: 0;
   padding: 0;
 }
-html.embedded #stage-map.not-reading #map,
-html.embedded body #stage-map.not-reading #map {
+html.embedded #stage-map #map,
+html.embedded body #stage-map #map {
   position: absolute;
   top: 0;
   left: 0;
-  right: 40%;
-  bottom: 0;
-  height: auto;
-  width: auto;
-}
-html.embedded #stage-map.not-reading #stage-summary,
-html.embedded body #stage-map.not-reading #stage-summary {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 60%;
+  right: 50%;
   bottom: 0;
   height: auto;
   width: auto;
 }
 html.embedded #stage-map #stage-summary,
 html.embedded body #stage-map #stage-summary {
-  padding: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 50%;
+  bottom: 0;
+  height: auto;
+  width: auto;
+}
+html.embedded #stage-map.reading #content-title,
+html.embedded body #stage-map.reading #content-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 0;
+  height: 100px;
+}
+html.embedded #stage-map.reading #content-title h2,
+html.embedded body #stage-map.reading #content-title h2 {
+  font-size: 16px;
+  line-height: 22px;
+}
+html.embedded #stage-map.reading #content-title .content-author .author-thumb,
+html.embedded body #stage-map.reading #content-title .content-author .author-thumb {
+  display: none;
+}
+html.embedded #stage-map.reading #content-title .content-author h3,
+html.embedded body #stage-map.reading #content-title .content-author h3 {
+  font-size: 12px;
+  line-height: 12px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+html.embedded #stage-map.reading #content-title .content-author .profile-link,
+html.embedded body #stage-map.reading #content-title .content-author .profile-link {
+  display: none;
+}
+html.embedded #stage-map.reading #map,
+html.embedded body #stage-map.reading #map {
+  top: 140px;
+}
+html.embedded #stage-map.reading #stage-summary,
+html.embedded body #stage-map.reading #stage-summary {
+  top: 140px;
+}
+html.embedded #stage-map #stage-summary,
+html.embedded body #stage-map #stage-summary {
+  padding: 20px 0 20px 20px;
 }
 html.embedded #stage-map #stage-summary #main-count,
 html.embedded body #stage-map #stage-summary #main-count,

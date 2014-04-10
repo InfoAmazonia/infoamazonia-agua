@@ -3444,7 +3444,7 @@ a.mapbox-improve-map {
 	}
 }
 
-/* Layer share */
+/* Share modal */
 
 .modal.share-modal {
 	.social {
@@ -3466,6 +3466,47 @@ a.mapbox-improve-map {
 				color: #333;
 			}
 		}
+	}
+}
+
+/* Embed modal */
+
+.modal.embed-modal {
+	h3 {
+		font-size: 10px;
+		text-transform: uppercase;
+		border-bottom: 1px solid #eee;
+	}
+	.embed-setting {
+		p.setting-title {
+			font-size: 12px;
+		}
+		label {
+			font-weight: 600;
+		}
+		&.map-dimensions {
+			.setting {
+				display: table;
+				width: 70%;
+				p {
+					display: table-cell;
+					width: 1%;
+					label {
+						margin-right: 10px;
+					}
+				}
+			}
+			input {
+				width: auto;
+				min-width: 0;
+				display: inline;
+			}
+		}
+	}
+	textarea {
+		width: 100%;
+		background: #eee;
+		color: #999;
 	}
 }
 
@@ -3497,7 +3538,7 @@ html.embedded body {
 	#stage-map .subfilter {
 		display: none !important;
 	}
-	#stage-map.not-reading {
+	#stage-map {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -3511,7 +3552,7 @@ html.embedded body {
 			position: absolute;
 			top: 0;
 			left: 0;
-			right: 40%;
+			right: 50%;
 			bottom: 0;
 			height: auto;
 			width: auto;
@@ -3520,14 +3561,49 @@ html.embedded body {
 			position: absolute;
 			top: 0;
 			right: 0;
-			left: 60%;
+			left: 50%;
 			bottom: 0;
 			height: auto;
 			width: auto;
 		}
 	}
+	#stage-map.reading {
+		#content-title {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			padding: 20px 0;
+			height: 100px;
+			h2 {
+				font-size: 16px;
+				line-height: 22px;
+			}
+			.content-author {
+				.author-thumb {
+					display: none;
+				}
+				h3 {
+					font-size: 12px;
+					line-height: 12px;
+					margin: 0;
+					padding: 0;
+					text-align: right;
+				}
+				.profile-link {
+					display: none;
+				}
+			}
+		}
+		#map {
+			top: 140px;
+		}
+		#stage-summary {
+			top: 140px;
+		}
+	}
 	#stage-map #stage-summary {
-		padding: 20px;
+		padding: 20px 0 20px 20px;
 		#main-count,
 		#share {
 			display: none;

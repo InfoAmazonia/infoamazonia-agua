@@ -7,6 +7,8 @@ module.exports = {
 	'Type your search': 'Digite sua busca',
 	'Reports in': 'Relatos em',
 	'Reports': 'Relatos',
+	'report': 'Relato',
+	'reports': 'Relatos',
 	'Locations': 'Localizações',
 	'Oil': 'Petróleo',
 	'Filter by country': 'Filtre por país',

@@ -37,7 +37,7 @@
 							<a href="/user/{{content.creator.username}}/"><img src="{{gravatar(content.creator.email)}}" /></a>
 						</div>
 						<h3><a href="/user/{{content.creator.username}}/">{{content.creator.name}}</a></h3>
-						<a href="/user/{{content.creator.username}}/">Ver perfil</a>
+						<a href="/user/{{content.creator.username}}/" class="profile-link" translate>View profile</a>
 					</div>
 				</div>
 			</div>
@@ -83,13 +83,12 @@
 		<div id="stage-summary">
 			<article id="main-count">
 				<div ng-show="contents.length">
-					<div class="count-item" title="{{'Locations' | translate}}" ng-hide="feature">
-						<span class="mcf">&#xE600;</span>
-						<span class="count content">{{features.length}}</span>
-					</div>
-					<div class="count-item" title="{{'Reports' | translate}}">
+					<div class="count-item">
 						<span class="lsf">&#xe101;</span>
-						<span class="count feature">{{contents.length}}</span>
+						<span class="count contents">{{contents.length}}</span>
+						<span class="label">
+							<ng-pluralize count="contents.length" when="{'0': 'reports', 'one': 'report', 'other': 'reports'}" translate></ng-pluralize>
+						</span>
 					</div>
 				</div>
 				<div ng-hide="contents.length">

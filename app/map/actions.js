@@ -127,6 +127,8 @@ exports.MapActionsCtrl = [
 
 		$scope.embed = function(embedUrl) {
 			MapEmbed.activate({
+				width: 750,
+				height: 450,
 				embedUrl: embedUrl,
 				close: function() {
 					MapEmbed.deactivate();

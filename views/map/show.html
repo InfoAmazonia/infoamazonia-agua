@@ -54,27 +54,27 @@
 				<div ng-show="filteredData.country || filteredData.state || filteredData.city">
 					<p class="tip"><span translate>Selected</span>:</p>
 					<ul class="selected-list">
-						<li ng-show="filteredData.country" ng-click="updateState({'country': '', 'state': '', 'city': ''})">{{filteredData.country}}</li>
-						<li ng-show="filteredData.state" ng-click="updateState({'state': '', 'city': ''})">{{filteredData.state}}</li>
-						<li ng-show="filteredData.city" ng-click="updateState('city', '')">{{filteredData.city}}</li>
+						<li ng-show="filteredData.country" ng-click="updateState({'country': '', 'state': '', 'city': ''})">{{filteredData.country.name}}</li>
+						<li ng-show="filteredData.state" ng-click="updateState({'state': '', 'city': ''})">{{filteredData.state.name}}</li>
+						<li ng-show="filteredData.city" ng-click="updateState('city', '')">{{filteredData.city.name}}</li>
 					</ul>
 				</div>
-				<div ng-hide="countries.length == 1 || filteredData.country">
+				<div ng-hide="addressData.country.length == 1 || filteredData.country">
 					<p class="tip"><span translate>Filter by country</span>:</p>
 					<ul class="country-list">
-						<li ng-repeat="country in countries" ng-click="updateState('country', country.name)">{{country.name}}</li>
+						<li ng-repeat="country in addressData.country" ng-click="updateState('country', country._id)">{{country.name}}</li>
 					</ul>
 				</div>
-				<div ng-hide="states.length == 1 || countries.length > 1 || filteredData.state">
+				<div ng-hide="addressData.state.length == 1 || addressData.country.length > 1 || filteredData.state">
 					<p class="tip"><span translate>Filter by state</span>:</p>
 					<ul class="state-list">
-						<li ng-repeat="state in states" ng-click="updateState('state', state.name)">{{state.name}}</li>
+						<li ng-repeat="state in addressData.state" ng-click="updateState('state', state._id)">{{state.name}}</li>
 					</ul>
 				</div>
-				<div ng-hide="cities.length == 1 || states.length > 1 || filteredData.state">
+				<div ng-hide="addressData.city.length == 1 || addressData.state.length > 1 || filteredData.state">
 					<p class="tip"><span translate>Filter by city</span>:</p>
 					<ul class="city-list">
-						<li ng-repeat="city in cities" ng-click="updateState('city', city.name)">{{city.name}}</li>
+						<li ng-repeat="city in addressData.city" ng-click="updateState('city', city._id)">{{city.name}}</li>
 					</ul>
 				</div>
 			</div>
@@ -110,13 +110,13 @@
 						{{filteredData.layer.title}}
 					</div>
 					<div ng-show="filteredData.country && !filteredData.feature" ng-click="updateState({'country': '', 'state': '', 'city': ''})" class="filter-box">
-						{{filteredData.country}}
+						{{filteredData.country.name}}
 					</div>
 					<div ng-show="filteredData.state && !filteredData.feature" ng-click="updateState({'state': '', 'city': ''})" class="filter-box">
-						{{filteredData.state}}
+						{{filteredData.state.name}}
 					</div>
 					<div ng-show="filteredData.city && !filteredData.feature" ng-click="updateState('city', '')" class="filter-box">
-						{{filteredData.city}}
+						{{filteredData.city.name}}
 					</div>
 					<div ng-show="!content">
 						<ul class="content-list">

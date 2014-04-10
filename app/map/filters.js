@@ -33,8 +33,13 @@ module.exports = [
 		var parentState = $state.current.name.split('.')[0];
 
 		$scope.updateState = function(state, value) {
-
+			
 			if(typeof state == 'string') {
+
+				// Clear filter if the same
+				if($stateParams[state] == value)
+					value = '';
+
 				var obj = {};
 				obj[state] = value;
 				state = obj;
@@ -135,7 +140,7 @@ module.exports = [
 							case 'country':
 							case 'state':
 							case 'city':
-								$scope.filteredData[filter] = toParams[filter];
+								$scope.filteredData[filter] = _.find($scope.addressData[filter], function(v) { return v._id == toParams[filter]; });
 								var features = $filter('filter')($scope.mapFeatures, {address: toParams[filter]});
 								var fC = [];
 								angular.forEach(features, function(feature) {
@@ -216,6 +221,7 @@ module.exports = [
 				if(features) {
 					$scope.features = features;
 					setAddresses();
+					console.log('address set');
 					$scope.counts.byCountry = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'country' }); if(a) return a.name; });
 					$scope.counts.byState = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'state' }); if(a) return a.name; });
 					$scope.counts.byCity = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'city' }); if(a) return a.name; });
@@ -226,8 +232,6 @@ module.exports = [
 			/*
 			 * Watch filter state and perform filtering
 			 */
-
-
 			var stateWatch = function(event, toState, toParams, fromState) {
 
 				// Perform filter if current state is filter state
@@ -264,7 +268,6 @@ module.exports = [
 				$scope.embedUrl = config.siteUrl + $location.path();
 
 			};
-
 			stateWatch();
 			var destroyStateWatch = $rootScope.$on('$stateChangeSuccess', stateWatch);
 			$scope.$on('$destroy', destroyStateWatch);
@@ -302,9 +305,10 @@ module.exports = [
 					}
 				})
 			});
-			$scope.countries = _.uniq(countries, function(c) { return c._id; });
-			$scope.states = _.uniq(states, function(s) { return s._id; });
-			$scope.cities = _.uniq(cities, function(c) { return c._id; });
+			$scope.addressData = {};
+			$scope.addressData.country = _.uniq(countries, function(c) { return c._id; });
+			$scope.addressData.state = _.uniq(states, function(s) { return s._id; });
+			$scope.addressData.city = _.uniq(cities, function(c) { return c._id; });
 		}
 	}
 ]

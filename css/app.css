@@ -1607,6 +1607,17 @@ input.no-canvas {
   line-height: 34px;
 }
 /*
+ * Profile Page
+ */
+.profile-page {
+  margin: 40px 0;
+}
+.profile-page .content-list > li {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+/*
  * Listing layouts
  */
 .default-item {

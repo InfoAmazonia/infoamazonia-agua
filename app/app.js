@@ -28,6 +28,7 @@ require('./common/mapView');
  * Apps
  */
 
+require('./pages/app');
 require('./session/app');
 require('./user/app');
 require('./import/app');
@@ -54,6 +55,7 @@ angular.module('mapasColetivos', [
 	'ngAnimate',
 	'infinite-scroll',
 	'colorpicker.module',
+	'iaRios.pages',
 	'mapasColetivos.mapView',
 	'mapasColetivos.user',
 	'mapasColetivos.pageTitle',

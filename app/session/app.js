@@ -17,12 +17,12 @@ angular
 					templateUrl: '/views/login.html'
 				});
 
-			$stateProvider
-				.state('signup', {
-					url: '/signup/',
-					controller: 'LoginCtrl',
-					templateUrl: '/views/signup.html'
-				});
+			// $stateProvider
+			// 	.state('signup', {
+			// 		url: '/signup/',
+			// 		controller: 'LoginCtrl',
+			// 		templateUrl: '/views/signup.html'
+			// 	});
 
 			$stateProvider
 				.state('forgotPwd', {

@@ -1,6 +1,6 @@
 {
-	"name": "riversproject",
-	"description": "Collaborative river report mapping client",
+	"name": "infoamazonia-rios",
+	"description": "Collaborative river report mapping client for YBY",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/oeco/rivesrproject.git"

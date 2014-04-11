@@ -1606,6 +1606,21 @@ input.no-canvas {
   font-size: 22px;
   line-height: 34px;
 }
+.page .page-header {
+  background: #fff;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  -khtml-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  -o-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+  color: #333;
+  padding: 40px 0;
+  border-color: #ccc;
+}
+.page .page-header h1 {
+  color: #333;
+}
 /*
  * Profile Page
  */

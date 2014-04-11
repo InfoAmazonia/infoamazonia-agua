@@ -31,7 +31,7 @@ angular.module('mapasColetivos.index', [])
 		// Latest contents
 		$scope.latestReports = ContentData;
 
-		$scope.baseUrl = '';
+		$rootScope.baseUrl = $scope.baseUrl = '';
 
 		// Maps
 

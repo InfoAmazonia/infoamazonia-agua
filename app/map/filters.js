@@ -160,13 +160,17 @@ module.exports = [
 								$scope.filteredData.feature = _.find($scope.mapFeatures, function(f) { return f._id == toParams[filter] });
 								Page.setTitle($scope.filteredData.feature.title);
 								contents = Feature.getContents($scope.filteredData.feature, $scope.mapContents);
+								break;
 						}
 
-						filteredContents[filter] = contents;
+						if(typeof contents == 'object')
+							filteredContents[filter] = contents;
 
 					}
 
 				}
+
+				//console.log(filteredContents);
 
 				// Get intersected content results
 

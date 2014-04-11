@@ -48,6 +48,27 @@ exports.MapCtrl = [
 				return $location.path().indexOf('edit') !== -1;
 			}
 
+			if($scope.isEditing()) {
+
+				$scope.activeObj = 'settings';
+
+				$scope.mapObj = function(objType) {
+					if($scope.activeObj == objType)
+						return 'active';
+
+					return false;
+				}
+
+				$scope.setMapObj = function(obj) {
+
+					$scope.activeObj = obj;
+					setTimeout(function() {
+						window.dispatchEvent(new Event('resize'));
+					}, 100);
+
+				}
+			}
+
 			Map.resource.get({mapId: mapId}, function(map) {
 
 				MapView.sidebar(true);
@@ -56,7 +77,7 @@ exports.MapCtrl = [
 
 				$scope.map = map;
 
-				$scope.baseUrl = '/maps/' + map._id;
+				$scope.baseUrl = (typeof $rootScope.baseUrl == 'string') ? $rootScope.baseUrl : '/maps/' + map._id;
 
 				var mapOptions = _.extend({
 					center: $scope.map.center ? $scope.map.center : [0,0],
@@ -440,32 +461,13 @@ exports.MapCtrl = [
 
 		} else if($stateParams.mapId) {
 
-			$scope.initMap($stateParams.mapId);
+			$rootScope.baseUrl = undefined;
 
-			$scope.activeObj = 'settings';
+			$scope.initMap($stateParams.mapId);
 
 			$scope.$on('data.ready', function(event, map) {
 				Page.setTitle(map.title);
 			});
-
-			if($scope.isEditing()) {
-
-				$scope.mapObj = function(objType) {
-					if($scope.activeObj == objType)
-						return 'active';
-
-					return false;
-				}
-
-				$scope.setMapObj = function(obj) {
-
-					$scope.activeObj = obj;
-					setTimeout(function() {
-						window.dispatchEvent(new Event('resize'));
-					}, 100);
-
-				}
-			}
 
 		} else {
 

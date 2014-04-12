@@ -97,7 +97,9 @@
 			</article>
 			<section id="share" ng-controller="MapActionsCtrl">
 				<a href="javascript:void(0);" ng-click="embed(embedUrl)" translate>Embed map</a>
-				<a href="javascript:void(0);" ng-click="getDownload()" ng-hide="content" translate>Download GeoJSON</a>
+				<a href="javascript:void(0);" ng-click="download(contents, 'reports.json')" ng-hide="content" translate>Download reports</a>
+				<a href="javascript:void(0);" ng-click="download(content, 'report.json')" ng-show="content" translate>Download content</a>
+				<a href="javascript:void(0);" ng-click="download(geojson, 'map.geojson')" ng-hide="content" translate>Download GeoJSON</a>
 			</section>
 			<div class="stage-summary-content">
 				<div ng-hide="content">

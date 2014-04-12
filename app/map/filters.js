@@ -24,6 +24,11 @@ module.exports = [
 		 */
 		$scope.gravatar = User.gravatar;
 
+		$scope.geojson = {
+			'type': 'FeatureCollection',
+			'features': []
+		};
+
 		$scope.renderBlock = function(block) {
 			return SirTrevor.renderBlock(block);
 		}
@@ -170,8 +175,6 @@ module.exports = [
 
 				}
 
-				//console.log(filteredContents);
-
 				// Get intersected content results
 
 				var parsedContents = intersectResults(filteredContents);
@@ -226,6 +229,28 @@ module.exports = [
 					$scope.counts.byCountry = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'country' }); if(a) return a.name; });
 					$scope.counts.byState = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'state' }); if(a) return a.name; });
 					$scope.counts.byCity = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'city' }); if(a) return a.name; });
+					var geojson = [];
+					angular.forEach(features, function(f) {
+						var feature = _.extend({}, f);
+						feature.type = 'Feature';
+						for(var prop in feature) {
+							switch(prop) {
+								case 'properties':
+								case 'geometry':
+								case 'type':
+									break;
+								case 'layer':
+								case 'creator':
+									feature[prop] = angular.copy(feature[prop]._id);
+									feature.properties[prop] = angular.copy(feature[prop]);
+								default:
+									feature.properties[prop] = angular.copy(feature[prop]);
+									delete feature[prop];
+							}
+						}
+						geojson.push(feature);
+					});
+					$scope.geojson.features = angular.copy(geojson);
 				}
 			};
 			var destroyFeaturesWatch = $scope.$watch(function() {

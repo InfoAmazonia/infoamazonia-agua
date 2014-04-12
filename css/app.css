@@ -1621,6 +1621,21 @@ input.no-canvas {
 .page .page-header h1 {
   color: #333;
 }
+.page .page-content {
+  font-size: 16px;
+  line-height: 200%;
+}
+.page .page-content p {
+  margin-bottom: 40px;
+}
+.page .page-content ul {
+  margin: 0 0 40px 40px;
+  list-style: disc;
+}
+.page .page-content ul li {
+  margin: 0 0 30px;
+  padding: 0 0 0 20px;
+}
 /*
  * Profile Page
  */

@@ -46,7 +46,8 @@
 		"eventablejs": "latest",
 		"napa": "latest",
 		"express": "latest",
-		"nodemon": "latest"
+		"nodemon": "latest",
+		"filesaver.js": "latest"
 	},
 	"devDependencies": {
 		"watchify": "0.6.2",

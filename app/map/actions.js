@@ -1,5 +1,7 @@
 'use strict';
 
+var saveAs = require('filesaver.js');
+
 /*
  * Map controller
  */
@@ -138,6 +140,18 @@ exports.MapActionsCtrl = [
 			$scope.$on('$destroy', function() {
 				MapEmbed.deactivate();
 			});
+		}
+
+		$scope.download = function(data, filename) {
+
+			var data = angular.copy(data);
+
+			var output = JSON.stringify(data);
+
+			saveAs(new Blob([output], {
+				type: 'text/plain;charset=utf-8'
+			}), filename);
+
 		}
 
 	}

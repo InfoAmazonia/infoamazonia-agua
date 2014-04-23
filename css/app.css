@@ -829,41 +829,16 @@ input.no-canvas {
 /*
  * FOOTER
  */
-#colophon {
-  background: #111;
-  font-size: 12px;
-  padding: 20px 0;
+#mastfoot {
+  background: #fff;
+  padding: 40px 0;
 }
-#colophon a {
-  text-decoration: none;
-  color: #999;
-}
-#colophon a:hover {
-  color: #f0f0f0;
-}
-#colophon .institutional {
-  float: left;
-}
-#colophon .institutional a {
-  display: inline-block;
-  margin-right: 20px;
-}
-#colophon .license {
+#mastfoot .partners {
   float: right;
 }
-#credits .logos {
-  margin: 40px auto;
-  text-align: center;
-}
-#credits .logos li {
+#mastfoot .partners a {
   display: inline-block;
-  font-size: 12px;
-  color: #999;
-  font-weight: 600;
-  margin: 0 40px 0 0;
-}
-#credits .logos li img {
-  display: block;
+  margin: 0 20px 0 0;
 }
 .landing {
   margin: 0;

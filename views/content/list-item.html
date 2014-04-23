@@ -2,9 +2,9 @@
 	<header class="post-header">
 		<h2><a href="{{baseUrl}}/content/{{content._id}}">{{content.title}}</a></h2>
 		<p class="meta clearfix">
-			<span class="publisher">
+			<span class="publisher" ng-controller="UserCtrl">
 				<span class="lsf">clip</span>
-				<span class="publiser-content"><a href="/user/{{content.creator.username}}/">{{content.creator.name}}</a></span>
+				<span class="publiser-content"><a href="{{profileUrl(content.creator)}}/">{{content.creator.name}}</a></span>
 			</span>
 		</p>
 	</header>

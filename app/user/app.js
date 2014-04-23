@@ -14,7 +14,7 @@ angular
 			$stateProvider
 				.state('user', {
 					url: '/user/:userId/',
-					controller: 'UserCtrl',
+					controller: 'ProfilePageCtrl',
 					templateUrl: '/views/user/show.html',
 					resolve: {
 						'UserData': [
@@ -73,4 +73,5 @@ angular
 	.factory('User', require('./service').User)
 	.factory('ChangePwd', require('./changePwd').changePwd)
 	.factory('ChangeEmail', require('./changeEmail').changeEmail)
-	.controller('UserCtrl', require('./controller').UserCtrl);
+	.controller('UserCtrl', require('./controller').UserCtrl)
+	.controller('ProfilePageCtrl', require('./profilePageController'));

@@ -11,18 +11,9 @@ exports.UserCtrl = [
 	'ChangeEmail',
 	'Layer',
 	'Map',
-	'Page',
 	'MessageService',
-	'UserData',
-	'ContentData',
 	'SirTrevor',
-	function($scope, $rootScope, $state, $stateParams, User, Session, ChangePwd, ChangeEmail, Layer, Map, Page, Message, UserData, ContentData, SirTrevor) {
-
-		Page.setTitle(UserData.name);
-
-		$scope.user = UserData;
-
-		$scope.contents = ContentData;
+	function($scope, $rootScope, $state, $stateParams, User, Session, ChangePwd, ChangeEmail, Layer, Map, Message, SirTrevor) {
 
 		$scope.renderBlock = function(block) {
 			return SirTrevor.renderBlock(block);
@@ -131,7 +122,7 @@ exports.UserCtrl = [
 				if(user.username)
 					slug =  user.username;
 	
-				return '/user/' + slug + '/';
+				return '/user/' + slug + '';
 	
 			}
 

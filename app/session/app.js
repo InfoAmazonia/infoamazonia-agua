@@ -1,14 +1,10 @@
 'use strict';
 
 angular
-	.module('mapasColetivos.session', [
-		'facebook',
-		'directive.g+signin'
-	])
+	.module('mapasColetivos.session', [])
 	.config([
 		'$stateProvider',
-		'FacebookProvider',
-		function($stateProvider, FacebookProvider) {
+		function($stateProvider) {
 
 			$stateProvider
 				.state('login', {
@@ -30,11 +26,6 @@ angular
 					controller: 'LoginCtrl',
 					templateUrl: '/views/forgot_pwd.html'
 				});
-
-			var config = require('../config');
-
-			if(config.oauth && config.oauth.facebook)
-				FacebookProvider.init(config.oauth.facebook);
 
 		}
 	])

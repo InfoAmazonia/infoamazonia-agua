@@ -50,7 +50,6 @@ angular.module('mapasColetivos.dashboard', [])
 
 		var setUser = function(u) {
 			var user = angular.copy(u);
-			console.log(user);
 			if(user) {
 				User.resource.get({
 					userId: user._id
@@ -65,8 +64,8 @@ angular.module('mapasColetivos.dashboard', [])
 
 				// Check user role
 				if(user.role == 'admin') {
-					var layerReq = Layer.resource.get;
-					var mapReq = Map.resource.get;
+					var layerReq = Layer.resource.query;
+					var mapReq = Map.resource.query;
 				} else {
 					var layerReq = Layer.resource.userLayers;
 					var mapReq = Map.resource.userMaps;

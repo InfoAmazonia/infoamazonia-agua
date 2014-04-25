@@ -31,7 +31,7 @@ angular.module('mapasColetivos.leaflet', [])
 					map.addLayer(baseLayer);
 					map.addLayer(featureLayer);
 					map.addControl(legendControl);
-					map.infoControl.addInfo('<a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">Melhore este mapa</a>');
+					map.infoControl.addInfo('<a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map local">Melhore este mapa</a>');
 				});
 				return map;
 			},

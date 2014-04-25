@@ -40,6 +40,9 @@ exports.MapActionsCtrl = [
 			if(!map || !$scope.user)
 				return false;
 
+			if(Session.user().role == 'admin')
+				return true;
+
 			if(typeof map.creator == 'string' && map.creator == $scope.user._id) {
 				return true;
 			} else if(typeof map.creator == 'object' && map.creator._id == $scope.user._id) {

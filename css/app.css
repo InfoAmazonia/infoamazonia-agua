@@ -2820,7 +2820,7 @@ input.no-canvas {
 a.mapbox-improve-map {
   display: none;
 }
-a.mapbox-improve-map:first-child {
+a.mapbox-improve-map.local {
   display: inline;
 }
 /*

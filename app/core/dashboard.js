@@ -50,6 +50,7 @@ angular.module('mapasColetivos.dashboard', [])
 
 		var setUser = function(u) {
 			var user = angular.copy(u);
+			console.log(user);
 			if(user) {
 				User.resource.get({
 					userId: user._id
@@ -59,10 +60,62 @@ angular.module('mapasColetivos.dashboard', [])
 					$scope.userName = angular.copy($scope.user.name);
 
 				});
+
+				$scope.canCreate = !(user.role == 'collaborator');
+
+				// Check user role
+				if(user.role == 'admin') {
+					var layerReq = Layer.resource.get;
+					var mapReq = Map.resource.get;
+				} else {
+					var layerReq = Layer.resource.userLayers;
+					var mapReq = Map.resource.userMaps;
+				}
+
+				// Get layers
+				$scope.$layer = Layer;
+				layerReq(function(res) {
+					$scope.totalLayer = res.layersTotal;
+					$scope.layers = res.layers;
+
+					/*
+					 * Pagination
+					 */
+					$scope.$on('layer.page.next', function(event, res) {
+						if(res.layers.length) {
+							angular.forEach(res.layers, function(layer) {
+								$scope.layers.push(layer);
+							});
+							$scope.layers = $scope.layers; // trigger digest
+						}
+					});
+
+				});
+
+				// Get maps
+				$scope.$map = Map;
+				mapReq(function(res) {
+					
+					$scope.totalMap = res.mapsTotal;
+					$scope.maps = res.maps;
+
+					/*
+					 * Pagination
+					 */
+					$scope.$on('map.page.next', function(event, res) {
+						if(res.maps.length) {
+							angular.forEach(res.maps, function(map) {
+								$scope.maps.push(map);
+							});
+							$scope.maps = $scope.maps; // trigger digest
+						}
+					});
+				});
+
 			}
 		}
 
-		$scope.$watch('$session.user()', setUser);
+		$scope.$watch('$session.user()', _.once(setUser));
 
 		$scope.$on('user.save.success', function(event, user) {
 			setUser(user);
@@ -81,44 +134,6 @@ angular.module('mapasColetivos.dashboard', [])
 
 		$rootScope.$on('$stateChangeSuccess', function() {
 			stateFunctions();
-		});
-
-		$scope.$layer = Layer;
-		Layer.resource.userLayers(function(res) {
-			$scope.totalLayer = res.layersTotal;
-			$scope.layers = res.layers;
-
-			/*
-			 * Pagination
-			 */
-			$scope.$on('layer.page.next', function(event, res) {
-				if(res.layers.length) {
-					angular.forEach(res.layers, function(layer) {
-						$scope.layers.push(layer);
-					});
-					$scope.layers = $scope.layers; // trigger digest
-				}
-			});
-
-		});
-
-		$scope.$map = Map;
-		Map.resource.userMaps(function(res) {
-			
-			$scope.totalMap = res.mapsTotal;
-			$scope.maps = res.maps;
-
-			/*
-			 * Pagination
-			 */
-			$scope.$on('map.page.next', function(event, res) {
-				if(res.maps.length) {
-					angular.forEach(res.maps, function(map) {
-						$scope.maps.push(map);
-					});
-					$scope.maps = $scope.maps; // trigger digest
-				}
-			});
 		});
 
 		$rootScope.$on('map.delete.success', function(event, map) {

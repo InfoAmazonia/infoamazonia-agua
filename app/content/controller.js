@@ -120,6 +120,9 @@ exports.ContentCtrl = [
 
 			var contentCreatorId = content.creator._id ? content.creator._id : content.creator;
 
+			if(Session.user().role == 'admin')
+				return true;
+
 			// User is content owner
 			if(contentCreatorId == Session.user()._id) {
 				return true;

@@ -175,6 +175,9 @@ exports.FeatureCtrl = [
 
 				var featureCreatorId = feature.creator._id ? feature.creator._id : feature.creator;
 
+				if($scope.user.role == 'admin')
+					return true;
+
 				// User is feature owner
 				if(featureCreatorId == $scope.user._id) {
 					return true;

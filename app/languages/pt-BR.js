@@ -125,6 +125,5 @@ module.exports = {
 	'bioHerencia': 'ONG boliviana que promove o desenvolvimento sustentável na Amazônia com comunidades e organizações locais, através da articulação de atores sociais e a gestão dos recursos naturais e o ambiente. Herencia trabalha em três áreas de ação prioritárias: Conservação de recursos naturais e o ambiente; gestão econômica local; e participação cidadã.',
 	'bioDAR': 'Organização peruana comprometida na construção da governança, o desenvolvimento sustentável e a promoção dos direitos indígenas na Amazônia.',
 	'bioSPDA': 'Serviço jornalístico da Sociedade Peruana de Direito Ambiental (SPDA), que quer informar sobre as últimas notícias e acontecimentos relacionados com o meio ambiente do Peru e do mundo, na busca de uma maior consciência e ação para a preservação do nosso planeta.',
-	'View profile': 'Ver perfil',
 	'View website': 'Ver site'
 };

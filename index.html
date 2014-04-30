@@ -43,21 +43,21 @@
 				<section id="mastnav" class="clearfix">
 					<nav ng-controller="LoginCtrl">
 						<ul class="menu">
-							<li><a href="/about" title="Sobre o projeto">Sobre o projeto</a></li>
+							<li><a href="/about" title="{{'About the project' | translate}}" translate>About the project</a></li>
 							<li ng-show="isAuthenticated"><a href="/dashboard" title="Painel de Controle">
 								<span class="lsf">&#xe055;</span>
-								Painel de Controle
+								<span translate>Dashboard</span>
 							</a></li>
 							<li ng-show="isAuthenticated"><a title="Sair" href="javascript:void(0);" ng-click="logout()">
 								<span class="lsf">&#xE088;</span>
-								Sair
+								<span translate>Logout</span>
 							</a></li>
 						</ul>
 					</nav>
 				</section>
 				<div id="lang" ng-controller="TranslateCtrl">
 					<ul>
-						<li ng-click="changeLanguage('en-US')">English</li>
+						<!--<li ng-click="changeLanguage('en-US')">English</li>-->
 						<li ng-click="changeLanguage('pt-BR')">Português</li>
 						<li ng-click="changeLanguage('es-ES')">Español</li>
 					</ul>
@@ -67,14 +67,14 @@
 	</header>
 	<div id="messages" ng-controller="MessageCtrl">
 		<div class="message-content animte-show" ng-repeat="message in messages" ng-show="message.text">
-			<a class="close-button" ng-click="close(message)" href="javascript:void(0);">Fechar</a>
+			<a class="close-button" ng-click="close(message)" href="javascript:void(0);" translate>Close</a>
 			<p ng-class="message.status">{{message.text}}</p>
 		</div>
 	</div>
 	<div class="ui-view">
 	</div>
 	<div id="loading" loading-status-message>
-		<div class="loading-message">Carregando...</div>
+		<div class="loading-message" translate>Loading</div>
 	</div>
 	<footer id="mastfoot" class="clearfix">
 		<div class="container">

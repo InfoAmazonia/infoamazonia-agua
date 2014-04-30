@@ -79,7 +79,8 @@ angular.module('mapasColetivos', [
  * Translation
  */
 
-.config(require('./core/i18n'))
+.config(require('./core/i18n').config)
+.factory('i18n.RequestInterceptor', require('./core/i18n').RequestInterceptor)
 .controller('TranslateCtrl', [
 	'$scope',
 	'$translate',

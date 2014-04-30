@@ -1,9 +1,9 @@
 <div class="page-subheader anti-row row">
 	<div class="container">
 		<div class="twelve columns">
-			<h2>Mapas</h2>
-			<input class="filter" type="text" ng-model="search" placeholder="Busque por seus mapas" />
-			<p>Você tem <strong>{{totalMap}}</strong> mapas cadastrados.</p>
+			<h2 translate>Maps</h2>
+			<input class="filter" type="text" ng-model="search" placeholder="{{'Type your search' | translate}}" />
+			<p translate="userTotalMaps" translate-values="{ totalMap: totalMap }"></p>
 		</div>
 	</div>
 </div>
@@ -19,7 +19,7 @@
 				<h3>
 					<a href="/maps/new">
 						<span class="lsf">&#xE108;</span>
-						Criar novo mapa
+						<span translate>Create new map</span>
 					</a>
 				</h3>
 			</div>
@@ -33,7 +33,7 @@
 	<div class="container">
 		<div class="twelve columns">
 			<div class="info-box new-item">
-				<p><a href="/maps/new" title="Novo mapa">Você ainda não criou mapas! Clique aqui para criar seu primeiro.</a></p>
+				<p><a href="/maps/new" title="{{'New map' | translate}}" translate>You haven't created maps yet. Click here to create your first.</a></p>
 			</div>
 		</div>
 	</div>

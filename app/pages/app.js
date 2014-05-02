@@ -28,9 +28,15 @@ angular
 	.controller('PagesCtrl', [
 		'$scope',
 		'$state',
+		'$translate',
 		'Page',
 		'PageData',
-		function($scope, $state, Page, PageData) {
+		function($scope, $state, $translate, Page, PageData) {
 			Page.setTitle(PageData.title);
+			$scope.$watch(function() {
+				return $translate.use();
+			}, function(locale) {
+				$scope.locale = locale;
+			});
 		}
 	]);

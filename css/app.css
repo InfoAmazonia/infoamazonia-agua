@@ -1615,13 +1615,18 @@ input.no-canvas {
 .page .page-content p {
   margin-bottom: 40px;
 }
-.page .page-content ul {
+.page .page-content ul,
+.page .page-content ol {
   margin: 0 0 40px 40px;
-  list-style: disc;
 }
-.page .page-content ul li {
+.page .page-content ul li,
+.page .page-content ol li {
   margin: 0 0 30px;
   padding: 0 0 0 20px;
+  line-height: 200%;
+}
+.page .page-content ul {
+  list-style: disc;
 }
 /*
  * Profile Page

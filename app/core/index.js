@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mapasColetivos.index', [])
+angular.module('yby.index', [])
 
 .controller('IndexCtrl', [
 	'$rootScope',

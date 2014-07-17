@@ -1,0 +1,94 @@
+section#stage-map.row(ng-controller="MapFilterCtrl", ng-class="{reading: reading, 'not-reading': !reading}")
+	div
+		nav#stage-filters
+			.container
+				.twelve.columns
+					div(style="width:65%;float:left;")
+						.layers.filter-input
+							ul.filter-list
+								li(ng-repeat="l in mapFeatureLayers", ng-click="updateState('layer', l._id)", ng-class="{active: filteredData.layer == l}")
+									span(translate="") {{l.title}}
+									span.count(ng-show="counts.byLayer[l.title]") {{counts.byLayer[l.title]}}
+									p.description(translate="") {{l.description}}
+					div(style="width:35%;float:left;")
+						.search.filter-input
+							input(type="text", ng-model="textFilter", placeholder="{{'Type your search' | translate}}")
+		#content-title.section-title(ng-show="content")
+			.container
+				.seven.columns
+					p.layer {{content.layer.title}}
+					h2 {{content.title}}
+				.four.columns
+					.content-author
+						.author-thumb
+							a(href="/user/{{content.creator.username}}/")
+								img(src="{{gravatar(content.creator.email)}}")
+						h3
+							a(href="/user/{{content.creator.username}}/") {{content.creator.name}}
+						a.profile-link(href="/user/{{content.creator.username}}/", translate="") View profile
+		div(ng-controller="FeatureCtrl")
+			.map-container
+				#map
+		nav#stage-address-filter.subfilter
+			.country-select
+				div(ng-show="filteredData.country || filteredData.state || filteredData.city")
+					p.tip
+						span(translate="") Selected
+						| :
+					ul.selected-list
+						li(ng-show="filteredData.country", ng-click="updateState({'country': '', 'state': '', 'city': ''})") {{filteredData.country.name}}
+						li(ng-show="filteredData.state", ng-click="updateState({'state': '', 'city': ''})") {{filteredData.state.name}}
+						li(ng-show="filteredData.city", ng-click="updateState('city', '')") {{filteredData.city.name}}
+				div(ng-hide="addressData.country.length == 1 || filteredData.country")
+					p.tip
+						span(translate="") Filter by country
+						| :
+					ul.country-list
+						li(ng-repeat="country in addressData.country", ng-click="updateState('country', country._id)") {{country.name}}
+				div(ng-hide="addressData.state.length == 1 || addressData.country.length > 1 || filteredData.state")
+					p.tip
+						span(translate="") Filter by state
+						| :
+					ul.state-list
+						li(ng-repeat="state in addressData.state", ng-click="updateState('state', state._id)") {{state.name}}
+				div(ng-hide="addressData.city.length == 1 || addressData.state.length > 1 || filteredData.state")
+					p.tip
+						span(translate="") Filter by city
+						| :
+					ul.city-list
+						li(ng-repeat="city in addressData.city", ng-click="updateState('city', city._id)") {{city.name}}
+		#stage-summary
+			article#main-count
+				div(ng-show="contents.length")
+					.count-item
+						span.lsf &#57601;
+						span.count.contents {{contents.length}}
+						span.label
+							ng-pluralize(count="contents.length", when="{'0': 'reports', 'one': 'report', 'other': 'reports'}", translate="")
+				div(ng-hide="contents.length")
+					p.not-found(translate="") Nothing found
+			section#share(ng-controller="MapActionsCtrl")
+				a(href="javascript:void(0);", ng-click="embed(embedUrl)", translate="") Embed map
+				a(href="javascript:void(0);", ng-click="download(contents, 'reports.json')", ng-hide="content", translate="") Download reports
+				a(href="javascript:void(0);", ng-click="download(content, 'report.json')", ng-show="content", translate="") Download content
+				a(href="javascript:void(0);", ng-click="download(geojson, 'map.geojson')", ng-hide="content", translate="") Download GeoJSON
+			.stage-summary-content
+				div(ng-hide="content")
+					p.filtering-label(ng-show="filteredData.feature || filteredData.layer || filteredData.country || filteredData.state", translate="") Viewing reports in
+					p.filtering-label(ng-hide="filteredData.feature || filteredData.layer || filteredData.country || filteredData.state", translate="") Latest reports
+					.filter-box(ng-show="filteredData.feature", ng-click="updateState('feature', '')")
+						| {{filteredData.feature.title}}
+					.filter-box(ng-show="filteredData.layer && !filteredData.feature", ng-click="updateState('layer', '')")
+						| {{filteredData.layer.title}}
+					.filter-box(ng-show="filteredData.country && !filteredData.feature", ng-click="updateState({'country': '', 'state': '', 'city': ''})")
+						| {{filteredData.country.name}}
+					.filter-box(ng-show="filteredData.state && !filteredData.feature", ng-click="updateState({'state': '', 'city': ''})")
+						| {{filteredData.state.name}}
+					.filter-box(ng-show="filteredData.city && !filteredData.feature", ng-click="updateState('city', '')")
+						| {{filteredData.city.name}}
+					div(ng-controller="ContentCtrl" ng-hide="content")
+						ul.content-list
+							li(ng-repeat="content in contents")
+								div(ng-include="'/views/content/list-item.html'", autoscroll="false")
+				div(ng-controller="ContentCtrl" ng-show="content")
+					.single-post.sidebar-block.active(ng-include="'/views/content/show.html'")

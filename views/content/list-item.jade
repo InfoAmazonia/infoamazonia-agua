@@ -1,0 +1,12 @@
+article.content.list-item
+	header.post-header
+		h2
+			a(href="{{baseUrl}}/content/{{content._id}}") {{content.title}}
+		p.meta.clearfix
+			span.publisher(ng-controller="UserCtrl")
+				span.lsf clip
+				span.publiser-content
+					a(href="{{profileUrl(content.creator)}}/") {{content.creator.name}}
+	section.post-content(dynamic="renderBlock(content.sirTrevorData[0])")
+	p.readmore
+		a(href="{{baseUrl}}/content/{{content._id}}", translate="") Read more

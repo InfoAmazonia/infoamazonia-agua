@@ -1,0 +1,12 @@
+.regular-page.profile-page(ng-controller="UserCtrl")
+  div
+    .container
+      .four.columns
+        img(src="{{user.gravatar(360)}}", alt="{{user.name}}")
+        h1
+          span.user-name {{user.name}}
+        p.bio(ng-show="user.bio") {{user.bio}}
+      .eight.columns
+        ul.content-list
+          li(ng-repeat="content in contents")
+            div(ng-include="'/views/content/list-item.html'", autoscroll="false")

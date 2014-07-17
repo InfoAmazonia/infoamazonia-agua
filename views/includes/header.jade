@@ -1,0 +1,30 @@
+header#masthead
+	.container
+		.seven.columns
+			h1.ia-citizen
+				a(href="http://infoamazonia.org/", title="InfoAmazonia Citizen")
+					span.title-text
+						span.ia InfoAmazonia
+						span.citizen(translate="") Citizen
+					img.logo(src="/img/logo.png")
+			h2.ia-citizen-project.agua
+				a(href="/", title="Água", translate="") Water
+		.five.columns
+			section#mastnav.clearfix
+				nav(ng-controller="LoginCtrl")
+					ul.menu
+						li
+							a(href="/about", title="{{'About the project' | translate}}", translate="") About the project
+						li(ng-show="isAuthenticated")
+							a(href="/dashboard", title="Painel de Controle")
+								span.lsf &#57429;
+								span(translate="") Dashboard
+						li(ng-show="isAuthenticated")
+							a(title="Sair", href="javascript:void(0);", ng-click="logout()")
+								span.lsf &#57480;
+								span(translate="") Logout
+			#lang(ng-controller="TranslateCtrl")
+				ul
+					// <li ng-click="changeLanguage('en-US')">English</li>
+					li(ng-click="changeLanguage('pt-BR')") Português
+					li(ng-click="changeLanguage('es-ES')") Español

@@ -1,6 +1,3 @@
 node_modules
-app/config.js
-dist/app.js
-lib/vendor.js
-img/maki-sprite.png
-.htaccess
+public
+npm-debug.log

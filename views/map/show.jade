@@ -61,13 +61,13 @@ section#stage-map.row(ng-controller="MapFilterCtrl", ng-class="{reading: reading
 			article#main-count
 				div(ng-show="contents.length")
 					.count-item
-						span.lsf &#57601;
+						span.lsf &#57601; 
 						span.count.contents {{contents.length}}
 						span.label
 							ng-pluralize(count="contents.length", when="{'0': 'reports', 'one': 'report', 'other': 'reports'}", translate="")
 				div(ng-hide="contents.length")
 					p.not-found(translate="") Nothing found
-			section#share(ng-controller="MapActionsCtrl")
+			section#share(ng-controller="AguaMapCtrl")
 				a(href="javascript:void(0);", ng-click="embed(embedUrl)", translate="") Embed map
 				a(href="javascript:void(0);", ng-click="download(contents, 'reports.json')", ng-hide="content", translate="") Download reports
 				a(href="javascript:void(0);", ng-click="download(content, 'report.json')", ng-show="content", translate="") Download content
@@ -77,15 +77,15 @@ section#stage-map.row(ng-controller="MapFilterCtrl", ng-class="{reading: reading
 					p.filtering-label(ng-show="filteredData.feature || filteredData.layer || filteredData.country || filteredData.state", translate="") Viewing reports in
 					p.filtering-label(ng-hide="filteredData.feature || filteredData.layer || filteredData.country || filteredData.state", translate="") Latest reports
 					.filter-box(ng-show="filteredData.feature", ng-click="updateState('feature', '')")
-						| {{filteredData.feature.title}}
+						| {{filteredData.feature.title}} 
 					.filter-box(ng-show="filteredData.layer && !filteredData.feature", ng-click="updateState('layer', '')")
-						| {{filteredData.layer.title}}
+						| {{filteredData.layer.title}} 
 					.filter-box(ng-show="filteredData.country && !filteredData.feature", ng-click="updateState({'country': '', 'state': '', 'city': ''})")
-						| {{filteredData.country.name}}
+						| {{filteredData.country.name}} 
 					.filter-box(ng-show="filteredData.state && !filteredData.feature", ng-click="updateState({'state': '', 'city': ''})")
-						| {{filteredData.state.name}}
+						| {{filteredData.state.name}} 
 					.filter-box(ng-show="filteredData.city && !filteredData.feature", ng-click="updateState('city', '')")
-						| {{filteredData.city.name}}
+						| {{filteredData.city.name}} 
 					div(ng-controller="ContentCtrl" ng-hide="content")
 						ul.content-list
 							li(ng-repeat="content in contents")

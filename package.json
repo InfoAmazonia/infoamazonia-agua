@@ -21,6 +21,7 @@
 		"postinstall": "mkdir -p public && ./node_modules/grunt-cli/bin/grunt build"
 	},
 	"dependencies": {
+		"filesaver.js": "latest",
 		"grunt-cli": "latest",
 		"grunt": "latest",
 		"grunt-contrib-copy": "latest",

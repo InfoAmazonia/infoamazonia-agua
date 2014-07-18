@@ -69,9 +69,9 @@ module.exports = [
 
 		var destroyDataReady = $scope.$on('data.ready', function(e, map) {
 
-			$scope.mapLayers = jQuery.extend([], map.fetchedLayers);
+			$rootScope.baseUrl = undefined;
 
-			console.log($scope.mapLayers);
+			$scope.mapLayers = jQuery.extend([], map.fetchedLayers);
 
 			$scope.mapFeatureLayers = _.filter($scope.mapLayers, function(layer) {
 				return layer.type == 'FeatureLayer';

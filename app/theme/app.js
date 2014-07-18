@@ -1,8 +1,13 @@
 'use strict';
 
-var yby = angular.module('yby');
 
-yby.config([
+/*
+ * YBY APP
+ */
+
+angular.module('yby')
+
+.config([
 	'$stateProvider',
 	function($stateProvider) {
 
@@ -38,9 +43,13 @@ yby.config([
 	}
 ]);
 
-var ybyMap = angular.module('yby.map');
+/*
+ * YBY MAP
+ */
 
-ybyMap.config([
+angular.module('yby.map')
+
+.config([
 	'$stateProvider',
 	function($stateProvider) {
 
@@ -49,4 +58,8 @@ ybyMap.config([
 		})
 
 	}
-]).controller('MapFilterCtrl', require('./filters'));
+])
+
+.factory('MapEmbed', require('./embed'))
+.controller('MapFilterCtrl', require('./filters'))
+.controller('AguaMapCtrl', require('./mapCtrl'));

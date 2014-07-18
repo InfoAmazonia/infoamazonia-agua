@@ -1,0 +1,21 @@
+.modal.embed-modal.embed-map
+	.modal-container
+		.modal-content
+			a.close-button.lsf(href="javascript:void(0);", ng-click="close()", title="Fechar") &#57615;
+			h2(translate="") Embed map
+			.embed-settings
+				h3(translate="") Settings
+				.embed-setting.map-dimensions
+					.setting
+						p
+							label(for="embed-width", translate="") Width 
+							input#embed-width(type="text", ng-model="width", size="3") 
+							| px
+						p
+							label(for="embed-height", translate="") Height 
+							input#embed-height(type="text", ng-model="height", size="3") 
+							| px
+			h3(translate="") Embed code
+			p(translate="") Copy and paste the code below to embed your map
+			textarea(disabled="")
+				iframe(src="{{embedUrl}}", width="{{width}}", height="{{height}}", frameborder="0")

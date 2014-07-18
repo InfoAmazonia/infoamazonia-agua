@@ -294,7 +294,7 @@ module.exports = [
 				if(fromState && toState.name !== fromState.name) {
 					setTimeout(function() {
 						MapService.get().invalidateSize(true);
-					}, 400);
+					}, 600);
 				}
 
 				$scope.embedUrl = config.siteUrl + $location.path();

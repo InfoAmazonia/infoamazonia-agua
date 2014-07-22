@@ -243,16 +243,16 @@ module.exports = [
 									break;
 								case 'layer':
 								case 'creator':
-									feature[prop] = angular.copy(feature[prop]._id);
-									feature.properties[prop] = angular.copy(feature[prop]);
+									feature[prop] = feature[prop]._id;
+									feature.properties[prop] = feature[prop];
 								default:
-									feature.properties[prop] = angular.copy(feature[prop]);
+									feature.properties[prop] = feature[prop];
 									delete feature[prop];
 							}
 						}
 						geojson.push(feature);
 					});
-					$scope.geojson.features = angular.copy(geojson);
+					$scope.geojson.features = geojson;
 				}
 			};
 			var destroyFeaturesWatch = $scope.$watch(function() {

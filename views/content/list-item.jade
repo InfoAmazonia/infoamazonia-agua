@@ -7,6 +7,6 @@ article.content.list-item
 				span.lsf clip 
 				span.publiser-content
 					a(href="{{profileUrl(content.creator)}}/") {{content.creator.name}}
-	section.post-content(dynamic="renderBlock(content.sirTrevorData[0])")
+	section.post-content(dynamic="renderBlock(content.sections[0])")
 	p.readmore
 		a(href="{{baseUrl}}/content/{{content._id}}", translate="") Read more

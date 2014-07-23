@@ -233,7 +233,7 @@ module.exports = [
 					$scope.counts.byCity = _.countBy(features, function(f) { var a = _.find(f.address, function(line) { return line.type == 'city' }); if(a) return a.name; });
 					var geojson = [];
 					angular.forEach(features, function(f) {
-						var feature = _.extend({}, f);
+						var feature = _.clone(f);
 						feature.type = 'Feature';
 						for(var prop in feature) {
 							switch(prop) {

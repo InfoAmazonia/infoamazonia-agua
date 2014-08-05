@@ -1,0 +1,18 @@
+#register-page.page
+	.page-header
+		.container
+			.twelve.columns
+				h1(translate) Collaborate
+	.page-content
+		.container
+			.eight.columns
+				div(ng-show="locale == 'pt-BR'")
+					p
+						| Para fazer parte da nossa rede de colaboradores envie um email para 
+						a(href="mailto:contact@infoamazonia.org") contact@infoamazonia.org
+						| .
+				div(ng-show="locale == 'es-ES'")
+					p
+						| Para unirse a nuestra red de colaboradores envie un correo electrónico a 
+						a(href="mailto:contact@infoamazonia.org") contact@infoamazonia.org
+						| .

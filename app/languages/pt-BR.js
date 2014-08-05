@@ -132,5 +132,6 @@ module.exports = {
 	'bioDAR': 'Organização peruana comprometida na construção da governança, o desenvolvimento sustentável e a promoção dos direitos indígenas na Amazônia.',
 	'bioSPDA': 'Serviço jornalístico da Sociedade Peruana de Direito Ambiental (SPDA), que quer informar sobre as últimas notícias e acontecimentos relacionados com o meio ambiente do Peru e do mundo, na busca de uma maior consciência e ação para a preservação do nosso planeta.',
 	'bioFAUNAGUA': 'Organização não governamental criada em 2004, sem fins lucrativos e com autonomia própria. Desde então, executou uma série de projetos voltados para o desenvolvimento local sustentável, no quadro geral de conservação e gestão dos recursos hidrobiológicos e zonas húmidas da Bolívia. Em 2007 formou uma aliança de colaboração de longo prazo com a Universidad Mayor de San Simon, em Cochabamba, Bolívia.',
-	'View website': 'Ver site'
+	'View website': 'Ver site',
+	'Collaborate': 'Colabore'
 };

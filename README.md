@@ -13,7 +13,12 @@ This is the front-end client of InfoAmazonia Água. It is a [YBY Client](http://
 		{
 			path: '/about/',
 			template: '/views/pages/about.html',
-			title: 'Sobre'
+			title: 'About'
+		},
+		{
+			path: '/collaborate/',
+			template: '/views/pages/collaborate.html',
+			title: 'Collaborate'
 		}
 	]
 ```

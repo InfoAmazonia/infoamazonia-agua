@@ -17,15 +17,16 @@ angular.module('yby.index', [])
 		$scope.$session = Session;
 
 		$scope.$on('$stateChangeSuccess', function() {
-
 			if($location.path() == '/' || $location.path().indexOf('/filter/') == 0) {
 				angular.element('html').addClass('landing');
 			}
-
 		});
 
 		$scope.$on('$stateChangeStart', function() {
 			angular.element('html').removeClass('landing');
+			if($location.path() == '/' || $location.path().indexOf('/filter/') == 0) {
+				angular.element('html').addClass('landing');
+			}
 		});
 
 		// Latest contents

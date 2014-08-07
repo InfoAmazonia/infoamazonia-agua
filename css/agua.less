@@ -3566,22 +3566,78 @@ html.embedded body {
 		border: 5px #fff solid;
 	}
 	// hidden elements
-	#masthead,
 	#collaborators,
 	#stage-map #stage-filters,
 	#stage-map .subfilter {
 		display: none !important;
+	}
+	#masthead {
+		position: absolute;
+		bottom: 0;
+		height: 39px;
+		right: 0;
+		left: 0;
+		top: auto;
+		border: 0;
+		border-bottom: 1px solid #eee;
+		background: #fff;
+		.container {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			.columns {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+		}
+		#mastnav,
+		#lang,
+		h1.ia-citizen .title-text {
+			display: none !important;
+		}
+		h1.ia-citizen {
+			font-size: 12px;
+			line-height: 40px;
+			margin: 0 0 0 10px;
+			padding: 0;
+			img {
+				width: auto;
+				height: 20px;
+				margin: 8px 10px 0 5px;
+			}
+		}
+		h2.ia-citizen-project.agua {
+			font-size: 14px;
+			line-height: 40px;
+			margin: 0 10px 0 0;
+			padding: 0;
+			float: right;
+			a {
+				font-size: inherit;
+				line-height: inherit;
+				margin: 0;
+				padding: 0;
+				&:before {
+					content: 'InfoAmazonia ';
+				}
+			}
+		}
+
 	}
 	#stage-map {
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
-		bottom: 0;
+		bottom: 40px;
 		height: auto;
 		width: auto;
 		margin: 0;
 		padding: 0;
+		.leaflet-top.leaflet-right {
+			top: 0;
+		}
 		#map {
 			position: absolute;
 			top: 0;

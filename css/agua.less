@@ -3663,13 +3663,27 @@ html.embedded body {
 			top: 0;
 			left: 0;
 			right: 0;
-			padding: 20px 0;
+			padding: 20px;
 			height: 100px;
+			.container {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				.columns {
+					width: 100%;
+					margin: 0;
+					padding: 0;
+				}
+			}
+			p {
+				margin: 0 0 10px;
+			}
 			h2 {
 				font-size: 16px;
 				line-height: 22px;
 			}
 			.content-author {
+				margin: 0;
 				.author-thumb {
 					display: none;
 				}
@@ -3678,7 +3692,7 @@ html.embedded body {
 					line-height: 12px;
 					margin: 0;
 					padding: 0;
-					text-align: right;
+					text-align: left;
 				}
 				.profile-link {
 					display: none;

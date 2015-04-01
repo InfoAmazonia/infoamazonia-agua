@@ -30,8 +30,8 @@ module.exports = function(grunt) {
 			main: {
 				files: [
 					{ src: 'css/**/*.css', dest: 'public/' },
-					{ src: 'img/**/*', dest: 'public/' },
-					{ src: 'font/**/*', dest: 'public/' }
+					{ src: 'img/**', dest: 'public/' },
+					{ src: 'font/**', dest: 'public/' }
 				]
 			}
 		},
